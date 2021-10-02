@@ -1,0 +1,1154 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  pandoc,
+  ja=standard,
+  jafont=noto-otf]{bxjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmonofont[]{Iosevka Term Extended}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Quarto が完成すると Jupyter でも R Markdown のように簡単にスライドや文書を作れるかもしれない},
+  pdfauthor={ill-identified (片桐 智志)},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\usepackage[normalem]{ulem}
+% Avoid problems with \sout in headers with hyperref
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage{tcolorbox}}
+\@ifpackageloaded{fontawesome}{}{\usepackage{fontawesome}}
+\definecolor{quarto-callout-color}{HTML}{acacac}
+\definecolor{quarto-callout-note-color}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\renewcommand*\figurename{図}
+\renewcommand*\tablename{表}
+}
+\AtBeginDocument{%
+\renewcommand*\listfigurename{List of Figures}
+\renewcommand*\listtablename{List of Tables}
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subfig}{}{\usepackage{subfig}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Quarto が完成すると Jupyter でも R Markdown
+のように簡単にスライドや文書を作れるかもしれない}
+\author{ill-identified (片桐 智志)}
+\date{2021/10/02}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{ux6982ux8981}{%
+\section*{概要}\label{ux6982ux8981}}
+\addcontentsline{toc}{section}{概要}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://quarto.org/}{Quarto} という R Markdown
+  のような動的ドキュメント生成プログラムが開発中
+\item
+  まだ開発版だが野心的な機能をめざしているらしい
+\item
+  単なる R Markdown の再設計ではなく, \textbf{Jupyter Notebook
+  の変換にも対応}している
+\item
+  R や Python だけでなく Jupyter カーネルで使える任意の言語でも R
+  Markdown のように扱えるかもしれない
+\item
+  使い方の参考になるように\textbf{この投稿も Quarto
+  を利用して書いている}
+\item
+  付録としてプレゼンテーション資料への変換, Jupyter Notebook
+  の変換例も用意した
+\end{itemize}
+
+\begin{tcolorbox}[colframe=quarto-callout-caution-color, colbacktitle=quarto-callout-caution-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}注意, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+Quarto
+は最近公開されたばかりで開発中なので\textbf{ここの記述もすぐ時代遅れになる可能性がある}ことに注意してほしい.
+
+(このように注記のためのブロックも追加の事前準備なしに簡単に書ける\footnote{https://quarto.org/docs/authoring/callouts.html})
+\end{tcolorbox}
+
+\hypertarget{ux306fux3058ux3081ux306b}{%
+\section{はじめに}\label{ux306fux3058ux3081ux306b}}
+
+最近公開された \href{https://quarto.org/}{Quarto} というソフト,
+最初はごちゃごちゃしてわかりにくかった R Markdown の YAML
+メタデータのフォーマットをすっきりさせただけと思っていたが,
+それどころではないということがわかってきたので紹介してみる. ただし,
+現時点ではまだ開発が始まったばかりであり, 頻繁に更新され,
+細かなバグも多くやや不安定である.
+
+そんな不安定な状況でなんで公開したか. 自分もこれに数ヶ月前に関心を持ち,
+興味深いとは思いつつも,
+もう少し安定してきてから紹介しようかと思っていた.
+しかし昨日リリースされた, \textbf{knitr} v1.35
+の\href{https://github.com/yihui/knitr/blob/master/NEWS.md}{NEWS}
+を見ると, あきらかに Quarto
+を意識したように見える機能追加が行われていた. RStudio
+的には結構本気で\footnote{gituhb
+  リポジトリを見ると一番コミットしてるのはなぜか RStudio CEO の J.J.
+  Allaire.}取り組んでいるプロジェクトなのかもしれない.
+公式ドキュメントも久々に見返すと以前よりさらに充実していたので,
+そろそろ紹介してみるタイミングかと思い公開してみた.
+
+Quarto の動作確認は以下のような環境で行った.\footnote{Quarto
+  について実際に調べたのは数ヶ月前で,
+  この記事公開に合わせて再度簡単に確認した程度} 開発版ではあるが,
+ドキュメントは既にそれなりに充実しており, R Markdown
+使用者なら想像で補って書けるところも多い.
+
+\begin{itemize}
+\tightlist
+\item
+  Ubuntu 20.04\footnote{Windows や Mac ではまったく動作確認していないが,
+    WSL とか AWS とか RStudio Workbench とか使えば Ubuntu
+    環境を得るのは簡単なので省略}
+\item
+  R 4.1.1
+\item
+  RStudio 2021.09.0 Build 351
+\item
+  Pandoc: 上記最新版 RStudio に同梱されているもの (v2.14.0.3) を使用
+\item
+  Quarto
+  \href{https://github.com/quarto-dev/quarto-cli/releases/tag/v0.2.178}{v0.2
+  Build 178}
+\item
+  \textbf{knitr} 1.36\footnote{1.36 は 1.35
+    の翌日にリリースされた\ldots{}}
+\item
+  Jupyter 関連:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Python 3.9.6 (on Pyenv)
+  \item
+    ipykernel: 6.4.1
+  \item
+    jupyter-lab: 3.1.14
+  \item
+    Julia: 1.6.3
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{quarto-ux306eux7279ux5fb4}{%
+\section{Quarto の特徴}\label{quarto-ux306eux7279ux5fb4}}
+
+\hypertarget{ux5f93ux6765ux901aux308a-markdown-ux30c1ux30e3ux30f3ux30afux3067ux66f8ux304f}{%
+\subsection{従来通り Markdown +
+チャンクで書く}\label{ux5f93ux6765ux901aux308a-markdown-ux30c1ux30e3ux30f3ux30afux3067ux66f8ux304f}}
+
+YAML メタデータの項目名やチャンクの設定方法といった一部に変更があるが,
+Markdown + チャンクによるプログラムの埋め込み, そして YAML
+メタデータによる文書のメタデータや出力媒体の設定という基本は変わらない.
+よって R Markdown ユーザにとっては移行が容易だろう.
+
+\hypertarget{ux3059ux3067ux306b-rstudio-ux306bux5bfeux5fdcux3057ux3066ux3044ux308b}{%
+\subsection{すでに RStudio
+に対応している}\label{ux3059ux3067ux306b-rstudio-ux306bux5bfeux5fdcux3057ux3066ux3044ux308b}}
+
+Quarto
+がインストールされていなければ表示されないので気づいてない人のほうが多いだろうが,
+実はすでに RStudio のエディタも Quarto に対応しており, R Markdown
+のようにファイルやプロジェクトを新規作成したりできる
+(図~\ref{fig-rstudio-menu}).
+
+\begin{figure}
+
+{\centering 
+
+\includegraphics{img/rstudio-menu.png}
+
+}
+
+\caption{\label{fig-rstudio-menu}RStudio の新規作成メニュー}
+
+\end{figure}
+
+また, RStudio v1.4 から R Markdown
+のビジュアルエディタ機能が追加されたことは既に知っている人も多いかもしれないが,
+\textbf{このビジュアルエディタは Quarto にも対応している}. (ただし私は
+Visual Editor をあまりつかってないので既知の不具合にも詳しくない)
+
+\begin{figure}
+
+{\centering 
+
+\includegraphics{img/visual-editor.png}
+
+}
+
+\caption{\label{fig-visual}ビジュアルエディタ上での Quarto}
+
+\end{figure}
+
+\hypertarget{yaml-ux30e1ux30bfux30c7ux30fcux30bfux306eux69cbux6587ux304cux4f7fux3044ux3084ux3059ux304fux306aux3063ux305f}{%
+\subsection{YAML
+メタデータの構文が使いやすくなった}\label{yaml-ux30e1ux30bfux30c7ux30fcux30bfux306eux69cbux6587ux304cux4f7fux3044ux3084ux3059ux304fux306aux3063ux305f}}
+
+これは R Markdown 利用者でないと良さが分かりづらいかもしれない.
+それ以外のユーザにとっては, R Markdown 開発開始当時にはなかった, 最近の
+Pandoc で追加された機能 (v2.14 あたりに準拠?) をベースに, YAML
+メタデータで文書全般の設定を指定できる, という程度の認識で良いと思う.
+
+以下, R Markdown ユーザを想定とした解説.
+
+以前『\href{https://ill-identified.hatenablog.com/entry/2020/09/05/202403}{R
+Markdown の YAML
+ヘッダでハマったおまえのための記事}』と題して書いたように, R Markdown の
+YAML メタデータは Pandoc が使用する項目と, \textbf{knitr} や
+\textbf{rmarkdown} パッケージが参照する項目が複雑に入り混じっていて,
+初学者を混乱させる可能性があった. Quarto
+ではこのようなメタデータの構造が一新され, かなり洗練された. 例えば
+\texttt{header-includes} のように, 従来は HTML や PDF
+の出力ごとに個別設定できない項目というのがいくつもあった.
+複数媒体でレイアウトを揃えようとするとこの制約が邪魔になることが結構あったのだが,
+Quarto では \texttt{format} フィールド以下にネストすることで,
+出力フォーマットごとに設定できたりする. knitr
+のデフォルトのチャンクオプション (Quarto では Execution options
+と呼ばれる) もほぼ全て YAML メタデータの \texttt{execute}
+フィールドに書くことができるようだ (以前はこれもまた
+\texttt{knitr::opts\_chunk\$set()} と YAML
+メタデータ内の項目とで重複があったり複雑だった).
+
+R Markdown ユーザなら以下の書き方がこれまで不可能であったこと,
+そして可能だったらどれだけ便利かわかるかもしれない.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{format}\KeywordTok{:}
+\AttributeTok{  }\FunctionTok{pdf}\KeywordTok{:}
+\AttributeTok{    }\FunctionTok{header{-}incldues}\KeywordTok{:}
+\AttributeTok{      \textbackslash{}usepackage[HiraginoMincho]\{zxjafont\}}
+\AttributeTok{    }\FunctionTok{execute}\KeywordTok{:}
+\AttributeTok{      }\FunctionTok{echo}\KeywordTok{:}\AttributeTok{ }\CharTok{true}
+\AttributeTok{  }\FunctionTok{html}\KeywordTok{:}
+\AttributeTok{    }\FunctionTok{execute}\KeywordTok{:}
+\AttributeTok{      }\FunctionTok{echo}\KeywordTok{:}\AttributeTok{ }\CharTok{false}
+\FunctionTok{exectute}\KeywordTok{:}
+\AttributeTok{  }\FunctionTok{eval}\KeywordTok{:}\AttributeTok{ }\CharTok{false}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+ただし, Quarto の実行オプションと knitr
+のチャンクオプションは似ているが完全互換ではないようだ. (例:
+\texttt{fig.cap} と \texttt{fig-cap}) しかし knitr
+エンジンでは実行オプションと knitr
+のチャンクオプション両方が使えるようで, 少し混乱するかもしれない.
+\end{tcolorbox}
+
+さらに, \texttt{editor\_options} というフィールドで, 編集時の挙動や,
+Pandoc
+変換時の文書全般の設定をわかりやすく制御できるようになった.\footnote{\url{https://quarto.org/docs/visual-editor/markdown.html\#writer-options}}
+その中には参考文献の表示位置 (セクション末尾ごとか, 巻末にまとめてか)
+とか自動折返しの文字数などが含まれている.
+
+\hypertarget{uplatex-ux306eux4f7fux7528ux3082ux3057ux3084ux3059ux304fux306aux308aux305dux3046}{%
+\subsubsection{(u)pLaTeX
+の使用もしやすくなりそう}\label{uplatex-ux306eux4f7fux7528ux3082ux3057ux3084ux3059ux304fux306aux308aux305dux3046}}
+
+R Markdown では TinyTeX の latexmk エミュレーション機能
+(\texttt{tinytex::latexmk} 関数) を利用して LaTeX
+のコンパイルを行っていた. しかし R Markdown 側が (u)pLaTeX
+の使用を想定していなかったので, 昔からのコード資産
+(例えば科研費LaTeXとか?) に頼っていて XeLaTeX や LuaLaTeX
+に移行できない人にとってはやりづらかった. YAML
+メタデータを一新したことで,
+メタデータ上でこの辺の制御も設定できるようになった.\footnote{動作保証はできないが,
+  https://zrbabbler.hatenablog.com/entry/2019/05/06/235854
+  なんかを参考に対応する項目を YAML メタデータに設定したり
+  \texttt{.latexmkrc} を用意したりすればできるかもしれない.}
+
+\hypertarget{ux65b0ux3057ux3044ux8a18ux6cd5ux306eux30c1ux30e3ux30f3ux30afux30aaux30d7ux30b7ux30e7ux30f3}{%
+\subsection{新しい記法のチャンクオプション}\label{ux65b0ux3057ux3044ux8a18ux6cd5ux306eux30c1ux30e3ux30f3ux30afux30aaux30d7ux30b7ux30e7ux30f3}}
+
+これも従来の R Markdown ユーザ向けの解説. R Markdown
+にあまり詳しくなくて, Jupyter
+の利用環境が快適になることを期待するしているなら,
+セクション~\ref{sec-jupyter-vs-code} まで飛ばしても良い.
+
+Quarto でも R Markdown (\textbf{knitr}) のコードチャンクが使用できる.
+それとは別に, \textbf{実行オプション} (Execution Options)
+と呼ばれる機能が用意されている. これは先日リリースされた knitr v1.35
+での記法とよく似ている (なお,
+デフォルトでは実行オプションは表示されないが, \texttt{echo:\ fenced}
+というオプションを使うことでコードチャンクの囲み部分も含めて表示することができる.).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}\OperatorTok{\{}\NormalTok{r}\OperatorTok{\}}
+\NormalTok{\#}\OperatorTok{|}\NormalTok{ label}\OperatorTok{:}\NormalTok{ code1}
+\NormalTok{\#}\OperatorTok{|}\NormalTok{ eval}\OperatorTok{:} \KeywordTok{true}
+\NormalTok{\#}\OperatorTok{|}\NormalTok{ output}\OperatorTok{:}\NormalTok{ asis}
+
+\DecValTok{1} \OperatorTok{+} \DecValTok{1}
+\NormalTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+{[}1{]} 2
+
+\textbf{knitr}
+でこの記法もサポートするようになった理由ははっきりしないが, 将来的に R
+Markdown の仕様を Quarto に寄せるか, あるいは knitr の機能を Quarto
+に使えるようにする意図があるのかもしれない. ただし現時点では,
+それぞれで使えるオプションはかなり似ているものの,
+互換性があるわけではなさそうだ.
+
+ではなぜ Quarto で新しい記法を採用するようになったか, それはおそらく, R
+Markdown 以外, つまり Jupyter でも使えるようにするためだろう.
+
+\hypertarget{sec-crossref}{%
+\subsubsection{相互参照を使いやすくした上で最初からサポート}\label{sec-crossref}}
+
+Jupyter の話の前に, Quarto
+の実行オプションによるもっと直接のメリットも紹介する. R Markdown
+は単体では相互参照をサポートしていなかった. Pandoc の文献引用機能, LaTeX
+のコマンドの直接入力などによって部分的にはできるが,
+統一感がなく便利とはいいがたい. 図表, ヘッダ, 引用文献の相互参照には
+\textbf{bookdown} パッケージが必要で,
+その上技術的な理由で参照の構文が統一されていなかった. 例えば図は
+\texttt{\textbackslash{}@(fig:image)} と書けるが, 章や節を参照するには
+\texttt{\textbackslash{}@(section1)} のように書いていた.
+セクションヘッダと図と表とでキャプションラベルの付け方が全部異なるのもややこしい.
+その点 Quarto の実行オプションでは,
+一貫性のある構文で相互参照をサポートしている. もちろん \textbf{bookdown}
+で使用できた, 数学書にあるような「定理XX」「命題XX」といった amsthm.sty
+準拠の相互参照も使用できる.
+
+具体的には, チャンクのラベルと図表のラベルを別々に定義できるように変更し
+(これによって subfigure のレイアウト設定もより簡単になった),
+相互参照は全て
+\texttt{@\textless{}媒体の種類\textgreater{}-\textless{}ラベル名\textgreater{}}
+という形式で参照できるようになった. 例えばグラフを出力するチャンクに,
+図のラベルとして \texttt{fig-plot1} などと定義すれば \texttt{@fig-plot1}
+で参照できる. さらに,
+「図XX」「表XX」のような接頭語を設定して自動で付加できるようにもなっている.
+
+以下の例は \textbf{ggplot2} で複数のグラフを描き (図~\ref{fig-plot1}),
+キャプションをつけて表示するもの. オプションの名称は R Markdown
+からあまり変わっていない. サブフィギュアのラベルは自動生成され,
+図~\ref{fig-plot1-1}, 図~\ref{fig-plot1-2}
+というふうにこちらも簡単に参照できる.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(airquality, }\FunctionTok{aes}\NormalTok{(Temp, Ozone)) }\SpecialCharTok{+} 
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+        \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{se =}\NormalTok{ F, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x)}
+
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(cyl), }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\subfloat[Air Quality]{\label{fig-plot1-1}%
+\begin{minipage}[t]{0.50\linewidth}
+\raisebox{-\height}{
+
+{\centering 
+
+\includegraphics{Quarto-introduction_files/figure-pdf/fig-plot1-1.pdf}
+
+}
+
+}\end{minipage}%
+}
+%
+\subfloat[箱ひげ図]{\label{fig-plot1-2}%
+\begin{minipage}[t]{0.50\linewidth}
+\raisebox{-\height}{
+
+{\centering 
+
+\includegraphics{Quarto-introduction_files/figure-pdf/fig-plot1-2.pdf}
+
+}
+
+}\end{minipage}%
+}
+
+\caption{\label{fig-plot1}複数の図}
+
+\end{figure}
+
+セクション見出しへの相互参照も, 見出し側に
+\texttt{\{\#sec-\textless{}ラベル名\textgreater{}\}} のように指定すれば,
+セクション~\ref{sec-crossref} というふうに参照できる.
+
+相互参照に関する詳しい話は公式の
+\href{https://quarto.org/docs/authoring/cross-references.html}{Cross
+References} のセクションを見てほしい.
+
+\hypertarget{sec-jupyter-vs-code}{%
+\subsection{Jupyter や VS Code への対応}\label{sec-jupyter-vs-code}}
+
+私自身は Jupyter をあまり好まないが,
+これが利用者層を増やす可能性が一番ありそうな,
+\textbf{大きな特徴}であるとも思う. Jupytyter(lab) は IDE
+としてもドキュメントエディタとしてみても機能がどっちつかずなので
+(この辺の不満を書いていたらとても長くなったので脚注にした\footnote{Jupyter
+  Notebook (公式は今はもう Jupyter の開発を積極的には行わないので
+  JupyterLab を使えと言っているが,
+  便利なプラグインのほとんどが使えなくなってしまったので私は JupyterLab
+  を使っていない) は IDE としては機能が少なすぎるし,
+  「インタラクティブな開発環境」と自称するわりには Python
+  はじめインタラクティブに扱える言語の特性を活かした機能が少ない.
+  かと言ってドキュメントやレポートを作成するツールとして見ると,
+  長大なソースコードや警告メッセージがそのまま表示され,
+  スライドとしての体をなさない,
+  PDFエクスポート時のオプションがなさすぎるなど, 機能が貧弱である.
+  Jupyter notebook をプレゼンテーションに変換する RISE
+  という拡張機能があるが, R Markdown
+  に比べると機能が少なすぎて使いづらい
+  (というか相変わらずコードや警告を非表示にできない/難しい)
+  ので諦めてしまった.}), Jupyter にも knitr
+のチャンクオプションのような機能が用意され,
+簡単にソースコードの表示を切り替えたりできないか,
+あるいは公式に互換性をサポートしてくれたら良いなと思いながら実現されないので私は
+Jupyter を使わない作業スタイルを追求し続けていたが, 先に Quarto
+がこれを実現することになりそうだ.
+
+Quarto は Jupyter でも Rmarkdown
+のチャンクオプションと似た機能を提供するため, \textbf{実行オプション}
+(Execution Options) という機能を用意している. これによって,
+
+\begin{itemize}
+\tightlist
+\item
+  長大なコードを折りたたんで出力する (クリックで展開するアレ)
+\item
+  読み込みログや大して意味のない大量の警告メッセージ
+  (しかし開発者にとっては一応確認する必要があるので消せない)
+  を文書生成時に非表示にする
+\item
+  逆にコードの解説のため, コードのみの出力する
+\item
+  \textbf{図表のキャプション表示と相互参照}する
+\end{itemize}
+
+といったことが全てできるようになり,
+整った文書を簡単に出力できるようになる. もちろん YAML
+メタデータも与えられるから, HTML や PDF
+生成するときの全体的なスタイル変更も, 従来の Jupyter
+側のエクスポート機能を使うよりかなり簡単だ.
+
+具体的にはこのような使い方になる. セル内の冒頭に \texttt{\#\textbar{}}
+の後に続けて書く記法で, HTML や PDF に変換したときの表示方法 (notebook
+上での表示ではない) を制御することができる. 例えば以下の
+\texttt{echo:\ false} はコードを表示しない, \texttt{warning:\ false}
+は警告を表示しない, という意味である.
+グラフのみ掲載して共有したい場合などに便利だろう.
+
+\begin{figure}
+
+{\centering 
+
+\includegraphics{img/jupyter-exec-opts.png}
+
+}
+
+\caption{\label{fig-jupyter-exec-opts}Jupyter Notebook
+のセルに実行オプションを記述する例}
+
+\end{figure}
+
+同様に, VS Code の Jupyter Notebook インターフェイス上でも Quarto
+を使用できるようだ. Google Colaboratory も ipynb
+形式でファイルをダウンロードすればたぶん使えると思う
+(普段使わないので詳細は不明).
+
+(実は先日公開した
+\href{https://ill-identified.hatenablog.com/entry/2021/08/06/200859}{Pysocviz}
+も, notebook で用例を作成した上で Quarto で
+PDFなどの静的なドキュメントに変換しようと考えていたが,
+開発版で不安定なのでメンテが大変になるかもと思い直してやめたという経緯がある.)
+
+\hypertarget{ux591aux69d8ux306a-jupyter-ux30abux30fcux30cdux30ebux3078ux306eux5bfeux5fdc}{%
+\subsubsection{多様な Jupyter
+カーネルへの対応}\label{ux591aux69d8ux306a-jupyter-ux30abux30fcux30cdux30ebux3078ux306eux5bfeux5fdc}}
+
+Jupyter への対応についてもう1つ強調すべきは, Quarto
+文書ファイルの新規作成時の設定項目に Jupyter カーネルを指定する
+\texttt{jupyter} という項目があること. 公式ドキュメントでは Python
+の例しかなかったが, このような項目があるということは,
+公式ドキュメントには明記していないものの \textbf{Quarto は Python 以外の
+Jupyter カーネルも対応している, あるいは将来そうする予定なのではないか},
+ということで \textbf{Julia カーネルを指定してみたところ, HTML
+版のみオプションも含め動作した}. R Markdown では \textbf{JuliaCall}
+というパッケージを使い Julia コードのチャンクを書くことができるが,
+現在はグラフの表示がうまくいかなかったりと制約が多い. しかし Quarto
+ではそのような問題は見られなかった.\footnote{実際には, 現時点では
+  Gadfly.jl のグラフがどうしてもSVGで保存されてしまうため, PDF
+  形式で保存するのが少し面倒である.
+  PDFのみの処理を場合分けして作れば動作するだろうが,
+  面倒だったので作らなかった.}
+
+Jupyter カーネルはかなりいろいろな言語に対応している\footnote{https://github.com/jupyter/jupyter/wiki/Jupyter-kernels}が,
+実際にこのレポート作成などと相性がよさそうなのは R, Julia, Matlab,
+Octave あたりぐらいだと思うが後二者は持ってない \&
+ほとんど使ってないので R と Julia の例のみ付録した.\footnote{なお,
+  カーネルの名称は \texttt{jupyter\ kernelspec\ list}
+  で一覧を表示できる.}
+
+なお, Julia 側のインターフェースも作ってるようだ
+(おそらく作りかけなので未検証):
+https://github.com/quarto-dev/quarto-julia
+
+\hypertarget{ux73feux6642ux70b9ux3067ux306eux5236ux7d04}{%
+\section{現時点での制約}\label{ux73feux6642ux70b9ux3067ux306eux5236ux7d04}}
+
+現時点で気になった点・注意点を挙げていく.
+まだ開発版なのでおそらく今後どんどん不具合が修正され機能も追加されていくとは思うが.
+
+\begin{itemize}
+\tightlist
+\item
+  グラフィックデバイスの扱いが不明瞭.
+  日本語ユーザにとって現状これが一番ネックな気がする.
+  \href{https://ill-identified.hatenablog.com/entry/2021/09/10/231230}{最近書いた}ように
+  Windows や Mac でグラフに書いた日本語を文字化けさせないためには
+  \textbf{ragg} パッケージのデバイス関数や \texttt{cairo\_pdf}
+  が使えるといいのだが, 指定方法がはっきり書かれていない. 現状は
+  \texttt{.qmd} ならば \texttt{\#\textbar{}\ dev:\ cairo\_pdf}
+  のように書けば適用されるようだが, 一方で YAML メタデータの
+  \texttt{execute:} に書いても認識されないようだ (Quarto ではなく
+  \textbf{knitr} の機能が適用されている?).
+\item
+  YAML メタデータのブール値で \texttt{yes}/\texttt{no} が使えない.
+  \texttt{true}/\texttt{false} のみ
+\item
+  R Markdown の出力フォーマット関数に対応するものがない
+
+  \begin{itemize}
+  \tightlist
+  \item
+    私が作った \textbf{rmdja}
+    は出力フォーマット内で日本語文書用の独自テンプレートを呼び出したり,
+    設定を自動調整したりしていたが, それができなくなった. knitr
+    のフックやフィルタで代用できそうなところもあるが,
+    複雑な処理を内部化し,
+    ユーザがほとんど何も設定しなくてもいいようなテンプレートを用意するのは難しい
+  \item
+    Markdown や HTML
+    に対応しているように見えて実は完全に互換性があるわけではなかったり独自仕様だったりするサービスは結構あるのでこれは少し困る
+  \end{itemize}
+\item
+  Jupyter の変換も便利だがまだ足りない機能も多い
+
+  \begin{itemize}
+  \tightlist
+  \item
+    たとえば Python
+    で描いたグラフに対して相互参照やキャプションをつけることができるが,
+    \texttt{kable()} のような表は作れない (Pandas
+    の表示に対応していない)
+  \item
+    Julia は HTML ならおおむね問題なく動くが,
+    PDF出力時の画像表示がやや使いづらい
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{qmd} を使用した場合は従来どおり \textbf{JuliaCall}
+      が使われてしまう
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{quarto-ux306eux5c0eux5165ux65b9ux6cd5}{%
+\section{Quarto
+の導入方法}\label{quarto-ux306eux5c0eux5165ux65b9ux6cd5}}
+
+Quarto の導入に特に難しいことはないが,
+上記のように開発版であるため動作が不安定である可能性が高いことには注意してほしい.
+Quarto はすでに公式ドキュメントがある程度充実しており,
+\href{https://quarto.org/docs/getting-started/installation.html}{インストール方法に関するページ}
+も作られているので, ここでは多くを書かない. GitHub から Quarto CLI
+の最新のリリースをダウンロードする. \texttt{.deb}, \texttt{.pkg},
+\texttt{.msi} の3通りのバイナリ/インストーラが用意されているので, 主要な
+OS は簡単にインストールできる. Quarto CLI
+単体だとターミナルでの呼び出しでしか使えないため, 「Pandoc
+の機能拡張版」というような認識で良いだろう. インストールできたら,
+RStudio を再起動すると新規作成ファイルの一覧に ``Quarto Doc''
+が追加されているはずであるので選択する. R 側で操作するための
+\textbf{quarto} パッケージもインストールが必要である.\footnote{必要だとは書いているが,
+  現時点ではなくても動作するのであまり気にする必要はないかもしれない.
+  中身を少し見た限りではドキュメントのエクスポートなどに関する関数ばかりで使わない人のほうが多そうである.
+  RStudio ではなくコンソールのみで操作したい人向け?}
+
+その他 TeX や Pandoc の設定が必要な場合もあるが, R Markdown
+を既に使っているならその設定を引き継げることが多いので説明は省略する.
+Jupyter 上で使いたい場合はもちろん Python や Jupyter
+が使えるようにする必要がある. これらの環境設定の多くはターミナルの
+\texttt{quarto} コマンドで確認できる.
+
+\hypertarget{rstudio-ux4e0aux3067ux306eux4f7fux7528ux6cd5}{%
+\subsection{RStudio
+上での使用法}\label{rstudio-ux4e0aux3067ux306eux4f7fux7528ux6cd5}}
+
+今後変更される可能性が高いので, あまり細かいことは書かない.
+
+\hypertarget{rstudio-ux4e0aux3067-knitrjupyter-ux3092ux4f7fux7528ux3059ux308bux5834ux5408}{%
+\subsubsection{RStudio 上で knitr/jupyter
+を使用する場合}\label{rstudio-ux4e0aux3067-knitrjupyter-ux3092ux4f7fux7528ux3059ux308bux5834ux5408}}
+
+RStudio で Quarto Doc を新規作成すると, 設定ウィンドウが開かれる.
+この設定は \texttt{.Rmd} の YAML メタデータに対応する部分で,
+後から書き換えることもできる. とりあえず エンジンが knitr
+になっていることだけ確認してほしい (図~\ref{fig-new-file}).
+
+\begin{figure}
+
+{\centering 
+
+\includegraphics{img/new-file.png}
+
+}
+
+\caption{\label{fig-new-file}qmd ファイル新規作成時の画面}
+
+\end{figure}
+
+``Create'' を押すと \texttt{.qmd} ファイルが作られる.
+エディタ上での見た目は \texttt{.Rmd} とそっくりそのままであり, YAML
+メタデータ + Markdown + knitr チャンクで構成される.
+細かい構文の違いは既に書いたとおり.
+これも既に書いたがビジュアルエディタモードも使える.
+
+R Markdown で ``knit'' ボタンだったものが ``Render'' に変わっており,
+これで qmd ファイルをコンパイルできる.
+
+エンジンに Jupyter を選択した場合も, テンプレートのチャンクエンジンが
+Python になるだけでほぼ同じである. この場合は \textbf{reticulate}
+のインストールと設定が必要なことに注意.
+
+(なお, 現時点では ``Preview in Window'' を選択してもなぜか Viewer
+ペーンに表示されてしまう. PDF
+の場合はこの手の組み込みビューアの例にもれず,
+文字表示がちょくちょくおかしくなるので注意. PDF
+が正しく出力されないと慌てる前に Okular とか Sumatra
+とかで見たほうがいい.)
+
+\hypertarget{jupyter-ux4e0aux3067-python3-ux30abux30fcux30cdux30ebux3092ux4f7fux7528ux3059ux308bux5834ux5408}{%
+\subsubsection{Jupyter 上で Python3
+カーネルを使用する場合}\label{jupyter-ux4e0aux3067-python3-ux30abux30fcux30cdux30ebux3092ux4f7fux7528ux3059ux308bux5834ux5408}}
+
+公式ドキュメントの対応する箇所はこちら:
+https://quarto.org/docs/tools/jupyter-lab.html
+
+Jupyter(lab) を起動した状態で, ターミナルで以下を実行する (JupyterHub
+を使ってリモートサーバ上で動かしている場合はもちろんホスト側のターミナルで)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{quarto}\NormalTok{ preview notebook.ipynb}
+\end{Highlighting}
+\end{Shaded}
+
+これはリアルタイムプレビューで, notebook 側の変更がすぐに反映される.
+つまり R Notebook のような機能.
+
+R Markdown の Knit ボタンのように文書を生成するには
+\texttt{quarto\ render} コマンドを使う.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{quarto}\NormalTok{ render notebook.ipynb}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{format:}
+の形式が複数書かれている場合は1番上のものが適用されるので,
+明示的に指定したい場合は, \texttt{-\/-to\ pdf}
+のようなオプションを追加する.
+
+Jupyter は元から Markdown セルを使用できるため, Markdown セル内の記述が
+qmd/Rmd の地の文に対応する. 出力オプションも R の場合と同様に notebook
+のセル内に実行オプションを書くことで適用される.
+
+\begin{tcolorbox}[colframe=quarto-callout-important-color, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}重要, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+R Markdown はデフォルトの設定では Knit 時に全てのチャンクを実行するが,
+\texttt{.ipynb} ファイルに対して \texttt{quarto\ render}
+を使っただけでは\textbf{セルが再実行されず}, \texttt{.ipynb}
+内部に保存されたものだけを反映する. 生成時に改めて実行するには
+\texttt{-\/-execute} オプションを追加する. 逆に言えば, 既存の
+\texttt{.ipynb} ファイルを \texttt{quarto\ render} で変換するだけなら
+Jupyter 本体は不要である.
+\end{tcolorbox}
+
+また, \texttt{quarto\ convert} コマンドで \texttt{.ipynb} と
+\texttt{.qmd} を相互に変換できるらしい
+(今回は試していないので詳しい挙動はわからない.).
+
+\hypertarget{vs-code-ux4e0aux3067-jupyter-ux3092ux64cdux4f5cux3059ux308bux5834ux5408}{%
+\subsubsection{VS Code 上で Jupyter
+を操作する場合}\label{vs-code-ux4e0aux3067-jupyter-ux3092ux64cdux4f5cux3059ux308bux5834ux5408}}
+
+公式ドキュメントの該当箇所:
+\url{https://quarto.org/docs/tools/vscode.html}
+
+VS Code で Python 拡張機能を入れていれば Jupyter Notebook が扱える.
+ここでもセルに出力オプションを書いたり YAML
+フロントマターを書いたりできる. VS Code のエディタではセルの使用言語を
+Python と Markdown 以外にする方法が分かりづらいが, セル右下の
+\texttt{{[}Python{]}} とか \texttt{{[}Markdown{]}}
+とか表示されている箇所をクリックすればドロップダウンリストが出てくるので,
+``raw'' を選べば YAML メタデータとして認識される (図~\ref{fig-vs-code}).
+
+\begin{figure}
+
+{\centering 
+
+\includegraphics{img/vs-code.png}
+
+}
+
+\caption{\label{fig-vs-code}VS Code 上で YAML
+メタデータを書くための設定}
+
+\end{figure}
+
+ドキュメントの生成方法は通常の Juypter と同じ.
+
+\begin{tcolorbox}[colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+インタラクティブモードではセルの種類を指定できないので使えない?
+\end{tcolorbox}
+
+\hypertarget{jupyter-ux4e0aux3067-julia-ux30abux30fcux30cdux30ebux3092ux4f7fux7528ux3059ux308bux5834ux5408}{%
+\subsubsection{Jupyter 上で Julia
+カーネルを使用する場合}\label{jupyter-ux4e0aux3067-julia-ux30abux30fcux30cdux30ebux3092ux4f7fux7528ux3059ux308bux5834ux5408}}
+
+公式ドキュメントには書かれていないが, Jupyter に Julia
+カーネルを登録すれば, 同じ要領で Julia
+のコードを埋め込んだ文書を作ることもできた. ただし, Julia の Plots や
+Gadfly はデフォルトでは SVG 形式で画像を出力するため, PDF
+での出力がうまくいかない. 今回はとりあえず PNG に変更して対処したが,
+Gadfly のみうまく動作していないようだ.
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{まとめ}\label{ux307eux3068ux3081}}
+
+Jupyter (Jupyerlab) は結構使われているが, 個人的には IDE
+としてもドキュメント作成ツールとしてもどっちつかずな感があった.
+それは既に述べたように, IDE としての機能が多くなく,
+対話的処理であると便利な機能もほとんどない (Jupyter
+にはプラグインで一応あるが, lab にはまだ対応していない).
+逆にドキュメント作成ツールとして見ると, 長大なコードを隠すことができず,
+技術文書や論文等で必要なフォーマットに変換するのも大変である.
+去年登場した Jupyter Book
+もオンラインドキュメントの作成には便利そうだが, R Markdown
+のようにいろいろな媒体への出力を想定していないようだった.
+
+しかし, Quarto
+の変換機能を使えばドキュメント作成ツールとしての使い勝手はかなり改善されると思う.
+Jupyter はもともと Markdown に対応しており, また実行オプションや YAML
+メタデータの記述は既存の ipnynb
+ファイルの設定と競合することは少ないと思われるため,
+気軽に試すことができる. もちろん,
+既に書いたように細かい不具合や不満はあるが, それでも清書してない
+\texttt{.ipynb} を共有するよりは見た目が良くなるのではないだろうか.
+
+先日更新された \textbf{knitr} の新機能は, Quarto
+の新機能を狙ったものにみえる. RStudio 社としては, 今後積極的に Quarto
+をアップデートしていくのではないかと勝手に期待している.
+
+つまり, おまえは万物を Quarto で書ける日が近いことが証明されたかたちだ.
+\sout{そして \textbf{rmdja} も来年くらいには不要になってそう}
+
+\hypertarget{ux4ed8ux9332-ux5404ux7a2eux8a2dux5b9aux3067ux306eux51faux529bux4f8b}{%
+\section{付録:
+各種設定での出力例}\label{ux4ed8ux9332-ux5404ux7a2eux8a2dux5b9aux3067ux306eux51faux529bux4f8b}}
+
+\begin{itemize}
+\tightlist
+\item
+  冒頭に書いたようにこの投稿は Quarto で生成したものだが, R Markdown
+  および Quarto の強みは同一のソースを少し設定を変えるだけで Markdown や
+  HTML や PDF の文書で生成できる点にある. よって,
+  この同一のファイルで作成した例を
+  \href{https://github.com/Gedevan-Aleksizde/quarto-demo-ja}{GitHub}
+  に投稿しておいた. ただし, DOCX (Word) や PPTX (パワーポイント)
+  は確認がめんどくさいので Libre Office
+  でざっと閲覧したのみで細かく確認してない.
+  興味のある人だけ各々確認してほしい.
+\end{itemize}
+
+まだ開発途上なので, 思ったよりうまく動作しない箇所も多い.
+ちょっと遠回りな方法で解決できそうなケースもあったが,
+将来のアップデートで使いやすくなることを期待して放置した.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Quarto-introduction.qmd} はこの投稿を生成した原稿である. 一応
+  PDF 出力もできるように設定してある.
+\item
+  \texttt{Knitr-Ja/} は最低限の日本語組版ができそうな PDF
+  の設定例である. 一応 HTML
+  出力ともある程度互換性があるように設定している.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    「最低限」なので文献リストは BibLaTeX を使用している.
+    日本語ユーザの多くは (u)pBibTeX に頼っているが,
+    これは設定や使い方少し複雑なので, 別のファイル
+    \texttt{Quarto-Ja-upbibtex.*} を用意している.
+  \end{itemize}
+\item
+  \texttt{Jupyter-Py/} は Python カーネルを使用した Jupyter Notebook
+  および, それを Quarto で HTML と PDF に変換したものである. Quarto
+  の機能を見るためいろいろ変わった設定を試している.
+\item
+  \texttt{Jupyter-R/*} は R カーネルを使用した Jupyter Notebook および,
+  それを Quarto で HTML と PDF に変換したものである.
+  (\sout{これが必要な状況があるのかはわからない})
+\item
+  \texttt{Jupyter-Julia/} は Julia カーネルを使用した Jupyter Notebook
+  および, それを Quarto で変換したものである. PDF は作っていないが,
+  Gadfly.jl の保存形式の問題を回避できれば生成できると思われる.
+\item
+  \texttt{Jupyter-slide/} は脚注で Jupyter や RISE
+  の機能を批判しまくったので, 責任を取るべく Quarto
+  ではスライド資料をより簡単に作れると実証したものである. カーネルは
+  Python を使っている. PDF (beamer), PPTX, HTML (revealjs)
+  の設定をしてあるが, 実際やってみたら HTML
+  の出力はあまりよろしくなかった. pandas の出力はうまく表示できないが,
+  Markdown の表はたぶん表示できると思う.
+\item
+  \texttt{Knitr-slide/*} は \texttt{.qmd}
+  でスライドを作成する場合の例である. こちらは R を使っているので,
+  従来の R Markdown と比較してみてほしい.
+\end{itemize}
+
+公式ドキュメントでも\href{https://quarto.org/docs/gallery/}{いくつかの使用例}が紹介されている.
+
+\hypertarget{ux88dcux8db3-r-markdown-ux3068-quarto-ux306e-latex-ux8a2dux5b9aux306eux6bd4ux8f03}{%
+\section{補足: R Markdown と Quarto の LaTeX
+設定の比較}\label{ux88dcux8db3-r-markdown-ux3068-quarto-ux306e-latex-ux8a2dux5b9aux306eux6bd4ux8f03}}
+
+\textbf{rmdja} では柔軟な設定ができるよう, pandoc
+テンプレートに大幅に手を加えたりフォーマット関数による動的な調整を行ったりしていたが,
+そういうのなしでエンドユーザ向けの設定だけでなるべく簡単に済ませようとした場合の設定を比較すると,
+両者の設定はフィールド名以外同じになる.
+
+R Markdown では YAML メタデータの記述はこうなる.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{output}\KeywordTok{:}\AttributeTok{ }
+\AttributeTok{  }\FunctionTok{pdf\_document}\KeywordTok{:}
+\AttributeTok{    }\FunctionTok{latex\_engine}\KeywordTok{:}\AttributeTok{ lualatex}
+\FunctionTok{documentclass}\KeywordTok{:}\AttributeTok{ bxjsarticle}
+\FunctionTok{classoption}\KeywordTok{:}
+\AttributeTok{  }\KeywordTok{{-}}\AttributeTok{ pandoc}
+\AttributeTok{  }\KeywordTok{{-}}\AttributeTok{ ja=standard}
+\AttributeTok{  }\KeywordTok{{-}}\AttributeTok{ jafont=haranoaji}
+\end{Highlighting}
+\end{Shaded}
+
+Quarto で同等のことをやろうとすると, こうなる.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{format}\KeywordTok{:}\AttributeTok{ }
+\AttributeTok{  }\FunctionTok{pdf}\KeywordTok{:}
+\AttributeTok{    }\FunctionTok{documentclass}\KeywordTok{:}\AttributeTok{ bxjsarticle}
+\AttributeTok{    }\FunctionTok{classoption}\KeywordTok{:}
+\AttributeTok{      }\KeywordTok{{-}}\AttributeTok{ pandoc}
+\AttributeTok{      }\KeywordTok{{-}}\AttributeTok{ ja=standard}
+\AttributeTok{      }\KeywordTok{{-}}\AttributeTok{ jafont=haranoaji}
+\FunctionTok{pdf{-}engine}\KeywordTok{:}\AttributeTok{ lualatex}
+\end{Highlighting}
+\end{Shaded}
+
+どちらもほぼ Pandoc の引数に対応させているだけなので,
+結果として同じになる. また, 文書クラスに \texttt{bxjsarticle}
+を使用\footnote{bxjscls というまとまりで, \texttt{bxjreport} や
+  \texttt{bxjsbook} も存在するが, 以降は便宜上 \texttt{bxjsarticle}
+  と表記する.}することで,
+日本語フォントの設定も簡単にしている.\footnote{ここでは, 最近の TeX Live
+  の標準日本語フォントである \texttt{haranoaji} (原ノ味) を指定している.
+  OS ごとに標準日本語フォントが異なるため,
+  OS依存をなくすためにこれを選択した. TeX Live 2020
+  以降ならそのままで使用でき, \textbf{tinytex} を使っているなら
+  \texttt{tinytex::tlmgr\_install("haranoaji")} でインストールできる.}
+\footnote{この他にも \texttt{bxjsarticle} には, 1行あたりの文字数,
+  1ページあたりの行数を指定するオプションがあるという利点がある.}
+上記では LuaLaTeX を使用しているが, XeLaTeX でも動作するはずである.
+これは \texttt{bxjsarticle}
+が自動的にそれぞれのエンジンでの組版に必要なパッケージを読み込んでくれるためである.
+プリセットが気に入らず, メインフォント,
+サンセリフフォントなどを個別に設定したい,
+ウエイトを調整したいという場合は LaTeX コマンドで追加設定する必要がある.
+この設定は XeLaTeX か LuaLaTeX かで変わってくる. 前者は zxjatype を,
+後者は luatex-ja のマニュアルを参考にしてほしい.
+
+しかし, 現在は \texttt{xelatex} よりも \texttt{lualatex}
+の使用を推奨する. 理由は以下の2つ.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://zrbabbler.hatenablog.com/entry/2020/02/09/223244}{zxjatype
+  作者が述懐}するように, XeLaTeX を選択した場合に使われる
+  \texttt{zxjatype} の組版はあまり厳格ではない
+\item
+  LuaLaTeX は以前から (up-TeX や XeLaTeX と比べ)
+  処理が遅いと言われているが, TinyTeX を使用する環境では LuaLaTeX
+  の遅さ以外にボトルネックがあるのであまり気にならない
+\end{enumerate}
+
+ただし, beamer
+に関しては逆に禁則処理が厳格でなくても気になることがあまりなく,
+かつ人気のある metropolis テーマは XeLaTeX での動作を想定しているので
+XeLaTeX を使用したほうが良いだろう.
+
+なお, ネット上では別のパターンの設定も存在するので,
+蛇足気味だがそのあたりの違いについても書いておく.
+
+例えば,
+『\href{https://nonki1974.hateblo.jp/entry/2020/02/19/130138}{TinyTeXのインストール
+\& RmarkdownでPDF on Windows10}』というページ.
+この設定例であればタイトルの Windows 10
+に限らず比較的他のOSでも動作しやすい.
+ただし誤りでないがいくつか注意が必要である.
+
+\begin{itemize}
+\tightlist
+\item
+  TinyTeX を R パッケージを使わずにインストールしてしまっている. R
+  も使うのなら \textbf{tinytex}
+  パッケージ経由でインストールしたほうが管理が簡単である (ブログ筆者は
+  Atom で編集する想定のためこうした?).
+  詳細は\href{https://gedevan-aleksizde.github.io/tinytex-doc-ja/index.html}{私の翻訳した公式ドキュメント}参照.
+\item
+  Noto フォントで揃える場合は \texttt{header-includes:} 以下は不要で,
+  上記のように, \texttt{classoption} 内で \texttt{jafont=noto}
+  のようにプリセットを設定できる.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    私の例では Noto ではなく TinyTeX
+    からインストールできる原ノ味フォント (\texttt{haranoaji})
+    を使用している. 私が \texttt{haranoaji} を指定しているのは, LuaLaTeX
+    で Noto フォントを使う場合は \texttt{noto-otc} とか
+    \texttt{noto-otf} とか名前が変わってややこしいため.
+  \end{itemize}
+\item
+  あと IPA フォントをインストールするという指示があるが結局使ってない.
+\end{itemize}
+
+さらに, 例えば以下のようなページではまた別の設定例が紹介されている.
+
+\begin{itemize}
+\tightlist
+\item
+  『\href{https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/}{R
+  Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF
+  を出力する}』
+\item
+  『\href{https://qiita.com/sky_y/items/15bf7737f4b37da50372\#\%E6\%96\%B9\%E6\%B3\%952-3-bxjscls\%E3\%81\%A7-cjkmainfont\%E5\%A4\%89\%E6\%95\%B0\%E3\%82\%92\%E4\%BD\%BF\%E3\%81\%86\%E6\%96\%B9\%E6\%B3\%95}{メモ:
+  Pandoc+LaTeXで気軽に日本語PDFを出力する - Qiita}』
+\end{itemize}
+
+\texttt{CJKmainfont}
+などを使う場合も確かに日本語フォントを指定し表示させられるが,
+現在ではややバッドノウハウと思える. CJKfont は中国語の組版を想定したもの
+(xeCJK) であり, 日本語環境を想定した設定ではないため,
+微妙に不自然になることがある (\sout{zxjatype
+も組版設定が甘いのでそこばかりしつこく突くのもフェアではないが}).
+現状一番簡単な設定の書き方として,
+これらの記事の下のほうでも少し紹介されている bxjscls
+シリーズの文書クラスを使うことをお薦めする.
+現在は特にプリアンブルを書き換えたりしなくともエラーが発生しないようになっている
+(はず). このあたりの仕様が変わったのは比較的最近なので,
+2-3数年前の記事だとあまり反映されていないのだろう.
+
+ただし, もしこのプリセットが納得行かず,
+3種類のフォントでそれぞれ違う系統のものを使いたい場合はこの限りではない
+(しかしその場合も bxjscls
+でプリセットを指定した上で上書きしたほうが使いやすいはずである).
+
+その他, 多くのブログ等で
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{header{-}includes}\KeywordTok{:}\AttributeTok{ }
+\AttributeTok{  }\KeywordTok{{-}}\AttributeTok{ \textbackslash{}usepackage\{zxjatype\} }
+\AttributeTok{  }\KeywordTok{{-}}\AttributeTok{ \textbackslash{}usepackage[HOGEHOGE]\{zxjafont\}}
+\end{Highlighting}
+\end{Shaded}
+
+のような \texttt{zxjatype} や \texttt{zxjafont} を手動で読み込む LaTeX
+コマンドを書く例を紹介している人がいるが, これらは XeLaTeX
+でのみ使用可能であり,
+また使用できるフォントはOSによって変わってくるため書き換えが面倒であり私はおすすめしない.
+これもやはり, \texttt{bxjsarticle} であれば LuaLaTeX を使うか XeLaTeX
+を使うかによって必要なパッケージを自動で読み込んでくれる. ただし,
+\texttt{beamer}
+の場合は日本語フォントを設定するオプションがないので自分で書く必要がある
+(詳しくは beamer のサンプルを参考に).
+
+さらに日付の古いページだと,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{output}\KeywordTok{:}
+\AttributeTok{  }\FunctionTok{pdf\_document}\KeywordTok{:}
+\AttributeTok{    ...}
+\FunctionTok{documentclass}\KeywordTok{:}\AttributeTok{ bxjsarticle}
+\FunctionTok{mainfont}\KeywordTok{:}\AttributeTok{ ...}
+\FunctionTok{sansfont}\KeywordTok{:}\AttributeTok{ ...}
+\end{Highlighting}
+\end{Shaded}
+
+といった記述例を紹介するものが見られる. あるいは \texttt{documentclass:}
+の設定が抜けているものも見られる. これらも一応動作するが,
+欧文用の設定に日本語フォントを放り込んだだけなので,
+フォントスタイルの適用がおかしくなったり,
+見出しの一部が英語になったりしてしまう.
+よって現在は積極的に使う必要はない.
+
+\end{document}
