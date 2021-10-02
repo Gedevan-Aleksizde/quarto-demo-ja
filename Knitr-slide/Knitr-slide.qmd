@@ -1,0 +1,136 @@
+---
+title: "日本語対応スライドの例 (Quarto + knitr エンジン)"
+author: "ill-identified"
+date: "2021/10/2"
+pdf-engine: xelatex
+format:
+  beamer:
+    keep-tex: true
+    theme: metropolis
+    themeoptions: 
+      - block=fill
+      - background=dark
+    header-includes:
+      - \usepackage[haranoaji]{zxjafont}
+      - \setbeamercolor{frametitle}{bg=Gray,fg=White}
+  revealjs: default
+  pptx: default
+monofont: Iosevka Term Extended
+execute:
+  echo: false
+  dev: cairo_pdf
+crossref:
+  fig-title: 図
+  tbl-title: 表
+  title-delim: ":"
+  fig-prefix: 図
+  tbl-prefix: 表
+  eq-prefix: 式
+  sec-prefix: セクション
+  ref-hyperlink: true
+bibliography: quarto.bib
+biblio-title: "参考文献"
+---
+
+##
+
+* Quarto は最近公開されたばかりで開発中
+* **ここの記述もすぐ時代遅れになる可能性がある**ことに注意
+
+## YAML メタデータの解説
+
+* Beamer について
+    * metropolis テーマ使用
+    * metropolis は XeLaTeX 使用を想定している
+    * しかし XeLaTeX では FontAwesome がうまく認識されない? ので callout ブロックは使用できない.
+    * フォントプリセット指定や細かい設定変更は現状 LaTeX コマンドで書くしかない
+* revealjs について
+    * 全体的に表示がうまくいってない
+    * デフォルトのデザインもあまりよくない
+* スライドは余白が貴重なので, コードを表示しないデフォルト設定に
+* `dev` は効果があるのかよくわからん
+
+## Markdown の例
+
+* 箇条書き
+
+1. aaa
+1. bbb
+1. ccc
+
+## ブロック構文
+
+* 以下は Beamer のブロックの出力例
+* Beamer 以外では機能しない可能性
+
+::: {.alertblock data-latex="{ブロック}"}
+これは `block` 環境
+:::
+
+::: {.alertblock data-latex="{警告ブロック}"}
+これは `alertblock` 環境
+:::
+
+::: {.exampleblock data-latex="{用例ブロック}"}
+これは `exampleblock` 環境
+:::
+
+## 数式表示
+
+* ブラック=ショールズ方程式 (@eq-black-scholes)
+
+$$
+\frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2}
+\frac{\partial^{2} \mathrm C}{\partial \mathrm C^2}
+  + \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ =
+  \mathrm r \mathrm C 
+$$ {#eq-black-scholes}
+
+## コード
+
+* コードのみで実行しない
+
+```{r}
+#| eval: false
+#| echo: true
+
+require(ggplot2)
+
+ggplot(mtcars, aes(wt, mpg, color = factor(gear))) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  facet_wrap(~gear)
+```
+
+## グラフ生成コード埋め込みの例
+
+```{r}
+#| label: fig-plot
+#| out.height: 80%
+#| fig.cap: "Rで描画したグラフ"
+
+require(ggplot2)
+
+ggplot(mtcars, aes(wt, mpg, color = factor(gear))) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  facet_wrap(~gear)
+```
+
+
+## 表
+
+* @tbl-tables-cars, @tbl-tables-pressure を並べて表示
+
+```{r}
+#| label: tbl-tables
+#| tbl-cap: "複数の表"
+#| layout-ncol: 2
+
+knitr::kable(head(cars), booktabs = T,  caption = "Cars データセット {#tbl-tables-cars}")
+knitr::kable(head(pressure), booktabs = T, caption = "Pressure データセット {#tbl-tables-pressure}")
+```
+
+## 文献引用
+
+@R-quarto, @R-rmdja

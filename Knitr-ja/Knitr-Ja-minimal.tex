@@ -1,0 +1,344 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  pandoc,
+  ja=standard,
+  jafont=noto-otf]{bxjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Deja Vu Serif}
+  \setsansfont[]{Deja Vu Sans}
+  \setmonofont[]{Iosevka Term Extended}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={比較的ミニマルな Quarto の日本語組版 PDF 文書設定},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.48,0.65}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\renewcommand*\figurename{図}
+\renewcommand*\tablename{表}
+}
+\AtBeginDocument{%
+\renewcommand*\listfigurename{List of Figures}
+\renewcommand*\listtablename{List of Tables}
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subfig}{}{\usepackage{subfig}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[style=authoryear]{biblatex}
+\addbibresource{../quarto.bib}
+
+\title{比較的ミニマルな Quarto の日本語組版 PDF 文書設定}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\hypertarget{ux57faux672cux8a2dux5b9a}{%
+\section{基本設定}\label{ux57faux672cux8a2dux5b9a}}
+
+\begin{itemize}
+\tightlist
+\item
+  LuaLaTeX または XeLaTeX でのコンパイルを想定している.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    既定では LuaLaTeX を使用している. \texttt{pdf-engine:\ xelatex} で
+    XeLaTeX を使用可能. R Markdown の \texttt{latex\_engine}
+    に対応してるが, Quarto は Pandoc の同名のオプションに直接渡すようだ.
+  \end{itemize}
+\item
+  \texttt{jafont=...} でフォントプリセットを設定可能. 指定可能な名称は
+  LuaLaTeX/XeLaTeX それぞれ luatex-japreset, bxjscls (zxjafont)
+  のドキュメント参照. 今回は比較的環境依存しない \texttt{haranoaji}
+  (原ノ味) を採用.
+\item
+  \texttt{mainfont}/\texttt{sansfont}/\texttt{monofont:}
+  はそれぞれメインフォント(通常は明朝体), サンセリフフォント
+  (通常は見出しや太字で使用するゴシック体), 等幅フォントの指定.
+  それぞれプリセットより優先される.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    これはあくまでオプションの紹介として書いただけ.
+    \textbf{多くの環境ではこの設定のままだとエラーが出るか文字化けするだろう}.
+    良くても別の (見慣れない) フォントにフォールバックする可能性が高い.
+    変更するか消してほしい.
+  \item
+    \textbf{rmdja}
+    パッケージでは欧文と和文でさらに個別指定できるようになっているが,
+    現状はそこまで細かい設定はできないし,
+    ほとんどの人は気にしないだろう. むしろ煩雑にさえ感じるかもしれない.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{markdown}{%
+\section{Markdown}\label{markdown}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  番号付きの
+\item
+  箇条書き
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    ネストも
+  \item
+    できる
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{ux6570ux5f0fux306eux8868ux793a}{%
+\subsection{数式の表示}\label{ux6570ux5f0fux306eux8868ux793a}}
+
+ブラック=ショールズ方程式 (式~\ref{eq-black-scholes})
+
+\begin{equation}\protect\hypertarget{eq-black-scholes}{}{
+\frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2}
+\frac{\partial^{2} \mathrm C}{\partial \mathrm C^2}
+  + \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ =
+  \mathrm r \mathrm C 
+}\label{eq-black-scholes}\end{equation}
+
+HTML と PDF 双方で相互参照を使用したい場合, LaTeX の
+\texttt{\textbackslash{}label()} ではなく Quarto の構文を使用する. KaTeX
+も使えるが PDF と互換性があるとは限らない?
+
+\hypertarget{ux30b3ux30fcux30c9ux306eux57cbux3081ux8fbcux307f}{%
+\subsection{コードの埋め込み}\label{ux30b3ux30fcux30c9ux306eux57cbux3081ux8fbcux307f}}
+
+図~\ref{fig-plot1-1}, 図~\ref{fig-plot1-2} を見よ.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(airquality, }\FunctionTok{aes}\NormalTok{(Temp, Ozone)) }\SpecialCharTok{+} 
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+        \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{se =}\NormalTok{ F, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x)}
+
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(cyl), }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\subfloat[Air Quality]{\label{fig-plot1-1}%
+\begin{minipage}[t]{0.50\linewidth}
+\raisebox{-\height}{
+
+{\centering 
+
+\includegraphics{Knitr-Ja-minimal_files/figure-pdf/fig-plot1-1.pdf}
+
+}
+
+}\end{minipage}%
+}
+%
+\subfloat[箱ひげ図]{\label{fig-plot1-2}%
+\begin{minipage}[t]{0.50\linewidth}
+\raisebox{-\height}{
+
+{\centering 
+
+\includegraphics{Knitr-Ja-minimal_files/figure-pdf/fig-plot1-2.pdf}
+
+}
+
+}\end{minipage}%
+}
+
+\caption{\label{fig-plot1}複数の図}
+
+\end{figure}
+
+次に 表~\ref{tbl-tables-cars}, 表~\ref{tbl-tables-pressure} を見よ.
+
+\begin{table}
+
+\subfloat[Cars ]{\label{tbl-tables-cars}%
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\begin{tabular}[t]{rr}
+\toprule
+speed & dist\\
+\midrule
+4 & 2\\
+4 & 10\\
+7 & 4\\
+7 & 22\\
+8 & 16\\
+9 & 10\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{minipage}%
+}
+%
+\subfloat[Pressure ]{\label{tbl-tables-pressure}%
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\begin{tabular}[t]{rr}
+\toprule
+temperature & pressure\\
+\midrule
+0 & 0.0002\\
+20 & 0.0012\\
+40 & 0.0060\\
+60 & 0.0300\\
+80 & 0.0900\\
+100 & 0.2700\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{minipage}%
+}
+
+\caption{\label{tbl-tables}複数の表}
+
+\end{table}
+
+\hypertarget{ux6587ux732eux5f15ux7528}{%
+\section{文献引用}\label{ux6587ux732eux5f15ux7528}}
+
+\autocite{R-quarto}, \textcite{R-rmdja}
+
+\printbibliography[title=参考文献]
+
+\end{document}

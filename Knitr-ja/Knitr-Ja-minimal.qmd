@@ -1,0 +1,101 @@
+---
+title: "比較的ミニマルな Quarto の日本語組版 PDF 文書設定"
+format:
+  pdf:
+    keep-tex: true
+    documentclass: bxjsarticle
+    dev: cairo_pdf
+    classoption:
+      - pandoc
+      - ja=standard
+      - jafont=noto-otf
+    mainfont: Deja Vu Serif
+    sansfont: Deja Vu Sans
+    monofont: Iosevka Term Extended
+    cite-method: biblatex
+    biblatexoptions:
+      - style=authoryear
+  html:
+    self-contained: true
+  word: default
+pdf-engine: lualatex
+crossref:
+  fig-title: 図
+  tbl-title: 表
+  title-delim: ":"
+  fig-prefix: 図
+  tbl-prefix: 表
+  eq-prefix: 式
+  sec-prefix: セクション
+  ref-hyperlink: true
+bibliography: ../quarto.bib
+biblio-title: 参考文献
+---
+
+# 基本設定
+
+* LuaLaTeX または XeLaTeX でのコンパイルを想定している.
+    * 既定では LuaLaTeX を使用している. `pdf-engine: xelatex` で XeLaTeX を使用可能. R Markdown の `latex_engine` に対応してるが, Quarto は Pandoc の同名のオプションに直接渡すようだ.
+* `jafont=...` でフォントプリセットを設定可能. 指定可能な名称は LuaLaTeX/XeLaTeX それぞれ luatex-japreset, bxjscls (zxjafont) のドキュメント参照. 今回は比較的環境依存しない `haranoaji` (原ノ味) を採用.
+* `mainfont`/`sansfont`/`monofont: ` はそれぞれメインフォント(通常は明朝体), サンセリフフォント (通常は見出しや太字で使用するゴシック体), 等幅フォントの指定. それぞれプリセットより優先される.
+    * これはあくまでオプションの紹介として書いただけ. **多くの環境ではこの設定のままだとエラーが出るか文字化けするだろう**. 良くても別の (見慣れない) フォントにフォールバックする可能性が高い. 変更するか消してほしい.
+    * **rmdja** パッケージでは欧文と和文でさらに個別指定できるようになっているが, 現状はそこまで細かい設定はできないし, ほとんどの人は気にしないだろう. むしろ煩雑にさえ感じるかもしれない.
+
+# Markdown
+
+1. 番号付きの
+1. 箇条書き
+    1. ネストも
+    1. できる
+
+## 数式の表示
+
+ブラック=ショールズ方程式 (@eq-black-scholes)
+
+$$
+\frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2}
+\frac{\partial^{2} \mathrm C}{\partial \mathrm C^2}
+  + \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ =
+  \mathrm r \mathrm C 
+$$ {#eq-black-scholes}
+
+
+HTML と PDF 双方で相互参照を使用したい場合, LaTeX の `\label()` ではなく Quarto の構文を使用する. KaTeX も使えるが PDF と互換性があるとは限らない?
+
+## コードの埋め込み
+
+@fig-plot1-1, @fig-plot1-2 を見よ.
+
+```{r}
+#| label: fig-plot1
+#| echo: true
+#| warning: false
+#| fig-cap: "複数の図"
+#| fig-subcap:
+#|   - "Air Quality"
+#|   - "箱ひげ図"
+#| layout: [50, 50]
+
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) + 
+        geom_point() + 
+        geom_smooth(method = "loess", se = F, formula = y ~ x)
+
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) + geom_boxplot()
+```
+
+次に @tbl-tables-cars, @tbl-tables-pressure を見よ.
+
+```{r}
+#| label: tbl-tables
+#| echo: false
+#| tbl-cap: "複数の表"
+#| layout-ncol: 2
+
+knitr::kable(head(cars), booktabs = T,  caption = "Cars {#tbl-tables-cars}")
+knitr::kable(head(pressure), booktabs = T, caption = "Pressure {#tbl-tables-pressure}")
+```
+
+# 文献引用
+
+[@R-quarto], @R-rmdja
