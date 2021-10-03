@@ -160,7 +160,7 @@
 \title{Quarto が完成すると Jupyter でも R Markdown
 のように簡単にスライドや文書を作れるかもしれない}
 \author{ill-identified (片桐 智志)}
-\date{2021/10/02}
+\date{2021/10/03}
 
 \begin{document}
 \maketitle
@@ -196,7 +196,7 @@
   \url{https://github.com/Gedevan-Aleksizde/quarto-demo-ja}
 \end{itemize}
 
-\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}注意, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-caution-color, colbacktitle=quarto-callout-caution-color!10!white]
+\begin{tcolorbox}[colback=white, toprule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}注意, toptitle=1mm, arc=.35mm, bottomtitle=1mm, titlerule=0mm, left=2mm, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white, rightrule=.15mm, coltitle=black, bottomrule=.15mm, colframe=quarto-callout-caution-color]
 Quarto
 は最近公開されたばかりで開発中なので\textbf{ここの記述もすぐ時代遅れになる可能性がある}ことに注意してほしい.
 
@@ -337,7 +337,11 @@ YAML メタデータは Pandoc が使用する項目と, \textbf{knitr} や
 初学者を混乱させる可能性があった. Quarto
 ではこのようなメタデータの構造が一新され, かなり洗練された. 例えば
 \texttt{header-includes} のように, 従来は HTML や PDF
-の出力ごとに個別設定できない項目というのがいくつもあった.
+の出力ごとに個別設定できない項目というのがいくつもあった.\footnote{指摘があったので補足:
+  工夫すれば \texttt{header-includes}
+  でも出力ごとに競合しづらい書き方もできるが,
+  ソースファイル1つで自己完結したい,
+  編集しやすくしたいという観点ではあまりおすすめできない}
 複数媒体でレイアウトを揃えようとするとこの制約が邪魔になることが結構あったのだが,
 Quarto では \texttt{format} フィールド以下にネストすることで,
 出力フォーマットごとに設定できたりする. knitr
@@ -355,7 +359,7 @@ R Markdown ユーザなら以下の書き方がこれまで不可能であった
 \FunctionTok{format}\KeywordTok{:}
 \AttributeTok{  }\FunctionTok{pdf}\KeywordTok{:}
 \AttributeTok{    }\FunctionTok{header{-}incldues}\KeywordTok{:}
-\AttributeTok{      \textbackslash{}usepackage[HiraginoMincho]\{zxjafont\}}
+\AttributeTok{      \textbackslash{}usepackage[hiragino{-}pro]\{zxjafont\}}
 \AttributeTok{    }\FunctionTok{execute}\KeywordTok{:}
 \AttributeTok{      }\FunctionTok{echo}\KeywordTok{:}\AttributeTok{ }\CharTok{true}
 \AttributeTok{  }\FunctionTok{html}\KeywordTok{:}
@@ -366,7 +370,7 @@ R Markdown ユーザなら以下の書き方がこれまで不可能であった
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[colback=white, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, toptitle=1mm, arc=.35mm, bottomtitle=1mm, titlerule=0mm, left=2mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, coltitle=black, bottomrule=.15mm, colframe=quarto-callout-tip-color]
 ただし, Quarto の実行オプションと knitr
 のチャンクオプションは似ているが完全互換ではないようだ. (例:
 \texttt{fig.cap} と \texttt{fig-cap}) しかし knitr
@@ -806,7 +810,7 @@ Jupyter は元から Markdown セルを使用できるため, Markdown セル内
 qmd/Rmd の地の文に対応する. 出力オプションも R の場合と同様に notebook
 のセル内に実行オプションを書くことで適用される.
 
-\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}重要, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-important-color, colbacktitle=quarto-callout-important-color!10!white]
+\begin{tcolorbox}[colback=white, toprule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}重要, toptitle=1mm, arc=.35mm, bottomtitle=1mm, titlerule=0mm, left=2mm, leftrule=.75mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, coltitle=black, bottomrule=.15mm, colframe=quarto-callout-important-color]
 R Markdown はデフォルトの設定では Knit 時に全てのチャンクを実行するが,
 \texttt{.ipynb} ファイルに対して \texttt{quarto\ render}
 を使っただけでは\textbf{セルが再実行されず}, \texttt{.ipynb}
@@ -850,7 +854,7 @@ Python と Markdown 以外にする方法が分かりづらいが, セル右下�
 
 ドキュメントの生成方法は通常の Juypter と同じ.
 
-\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[colback=white, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, toptitle=1mm, arc=.35mm, bottomtitle=1mm, titlerule=0mm, left=2mm, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, coltitle=black, bottomrule=.15mm, colframe=quarto-callout-tip-color]
 インタラクティブモードではセルの種類を指定できないので使えない?
 \end{tcolorbox}
 
@@ -934,6 +938,9 @@ Jupyter はもともと Markdown に対応しており, また実行オプショ
     日本語ユーザの多くは (u)pBibTeX に頼っているが,
     これは設定や使い方少し複雑なので, 別のファイル
     \texttt{Quarto-Ja-upbibtex.*} を用意している.
+  \item
+    (追記) upLaTeX でも動作させる例, \texttt{Knitr-ja-up-bx.*}
+    を追加した. しかし現状は BXjscls の文書クラスにしか対応していない.
   \end{itemize}
 \item
   \texttt{Jupyter-Py/} は Python カーネルを使用した Jupyter Notebook

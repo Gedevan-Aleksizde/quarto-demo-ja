@@ -3,6 +3,11 @@ title: Quarto が完成すると Jupyter でも R Markdown のように簡単に
 author: "ill-identified (片桐 智志)"
 date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 format:
+  docx:
+    toc: true
+    toc-title: 目次
+    number-sections: true
+    highlight-style: github
   html:
     toc: true
     toc-title: 目次
@@ -20,11 +25,6 @@ format:
       - jafont=noto-otf
     monofont: Iosevka Term Extended
     dev: cairo_pdf
-  docx:
-    toc: true
-    toc-title: 目次
-    number-sections: true
-    highlight-style: github
 pdf-engine: lualatex
 crossref:
   fig-title: 図
@@ -349,6 +349,7 @@ Jupyter (Jupyerlab) は結構使われているが, 個人的には IDE とし�
 * `Quarto-introduction.qmd` はこの投稿を生成した原稿である. 一応 PDF 出力もできるように設定してある.
 * `Knitr-Ja/` は最低限の日本語組版ができそうな PDF の設定例である. 一応 HTML 出力ともある程度互換性があるように設定している.
     * 「最低限」なので文献リストは BibLaTeX を使用している. 日本語ユーザの多くは (u)pBibTeX に頼っているが, これは設定や使い方少し複雑なので, 別のファイル `Quarto-Ja-upbibtex.*` を用意している.
+    * (追記) upLaTeX でも動作させる例, `Knitr-ja-up-bx.*` を追加した. しかし現状は BXjscls の文書クラスにしか対応していない.
 * `Jupyter-Py/` は Python カーネルを使用した Jupyter Notebook および, それを Quarto で HTML と PDF に変換したものである. Quarto の機能を見るためいろいろ変わった設定を試している.
 * `Jupyter-R/*` は R カーネルを使用した Jupyter Notebook および, それを Quarto で HTML と PDF に変換したものである. (~~これが必要な状況があるのかはわからない~~)
 * `Jupyter-Julia/` は Julia カーネルを使用した Jupyter Notebook および, それを Quarto で変換したものである. PDF は作っていないが, Gadfly.jl の保存形式の問題を回避できれば生成できると思われる.
