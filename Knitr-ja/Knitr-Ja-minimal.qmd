@@ -16,8 +16,10 @@ format:
     biblatexoptions:
       - style=authoryear
   html:
+    toc-title: 目次
     self-contained: true
-  word: default
+  word:
+    toc-title: 目次
 pdf-engine: lualatex
 crossref:
   fig-title: 図

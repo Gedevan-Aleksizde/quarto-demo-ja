@@ -14,8 +14,10 @@ format:
     monofont: Iosevka Term Extended
     cite-method: natbib
   html:
+    toc-title: 目次
     self-contained: true
-  word: default
+  word:
+    toc-title: 目次
 pdf-engine: latexmk
 latex-auto-mk: false
 pdf-engine-opt:
