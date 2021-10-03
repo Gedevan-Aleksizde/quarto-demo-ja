@@ -8,6 +8,8 @@ format:
     toc-title: 目次
     number-sections: true
     theme: minty
+    filters:
+      - add-target-attr.lua
   pdf:
     keep-tex: true
     toc: true
@@ -43,6 +45,9 @@ crossref:
 * R や Python だけでなく Jupyter カーネルで使える任意の言語でも R Markdown のように扱えるかもしれない
 * 使い方の参考になるように**この投稿も Quarto を利用して書いている**
 * 付録としてプレゼンテーション資料への変換, Jupyter Notebook の変換例も用意した
+    
+    <https://github.com/Gedevan-Aleksizde/quarto-demo-ja>
+
 
 :::{.callout-caution}
 ## 注意
@@ -105,7 +110,7 @@ RStudio の新規作成メニュー
 
 以下, R Markdown ユーザを想定とした解説.
 
-以前『[R Markdown の YAML ヘッダでハマったおまえのための記事](https://ill-identified.hatenablog.com/entry/2020/09/05/202403)』と題して書いたように, R Markdown の YAML メタデータは Pandoc が使用する項目と, **knitr** や **rmarkdown** パッケージが参照する項目が複雑に入り混じっていて, 初学者を混乱させる可能性があった. Quarto ではこのようなメタデータの構造が一新され, かなり洗練された. 例えば `header-includes` のように, 従来は HTML や PDF の出力ごとに個別設定できない項目というのがいくつもあった. 複数媒体でレイアウトを揃えようとするとこの制約が邪魔になることが結構あったのだが, Quarto では `format` フィールド以下にネストすることで, 出力フォーマットごとに設定できたりする.  knitr のデフォルトのチャンクオプション (Quarto では Execution options と呼ばれる) もほぼ全て YAML メタデータの `execute` フィールドに書くことができるようだ (以前はこれもまた `knitr::opts_chunk$set()` と YAML メタデータ内の項目とで重複があったり複雑だった).
+以前『[R Markdown の YAML ヘッダでハマったおまえのための記事](https://ill-identified.hatenablog.com/entry/2020/09/05/202403)』と題して書いたように, R Markdown の YAML メタデータは Pandoc が使用する項目と, **knitr** や **rmarkdown** パッケージが参照する項目が複雑に入り混じっていて, 初学者を混乱させる可能性があった. Quarto ではこのようなメタデータの構造が一新され, かなり洗練された. 例えば `header-includes` のように, 従来は HTML や PDF の出力ごとに個別設定できない項目というのがいくつもあった.^[指摘があったので補足: 工夫すれば `header-includes` でも出力ごとに競合しづらい書き方もできるが, ソースファイル1つで自己完結したい, 編集しやすくしたいという観点ではあまりおすすめできない] 複数媒体でレイアウトを揃えようとするとこの制約が邪魔になることが結構あったのだが, Quarto では `format` フィールド以下にネストすることで, 出力フォーマットごとに設定できたりする.  knitr のデフォルトのチャンクオプション (Quarto では Execution options と呼ばれる) もほぼ全て YAML メタデータの `execute` フィールドに書くことができるようだ (以前はこれもまた `knitr::opts_chunk$set()` と YAML メタデータ内の項目とで重複があったり複雑だった).
 
 R Markdown ユーザなら以下の書き方がこれまで不可能であったこと, そして可能だったらどれだけ便利かわかるかもしれない.
 
@@ -113,7 +118,7 @@ R Markdown ユーザなら以下の書き方がこれまで不可能であった
 format:
   pdf:
     header-incldues:
-      \usepackage[HiraginoMincho]{zxjafont}
+      \usepackage[hiragino-pro]{zxjafont}
     execute:
       echo: true
   html:
@@ -219,9 +224,9 @@ Jupyter Notebook のセルに実行オプションを記述する例
 
 Jupyter への対応についてもう1つ強調すべきは, Quarto 文書ファイルの新規作成時の設定項目に Jupyter カーネルを指定する `jupyter` という項目があること. 公式ドキュメントでは Python の例しかなかったが, このような項目があるということは, 公式ドキュメントには明記していないものの **Quarto は Python 以外の Jupyter カーネルも対応している, あるいは将来そうする予定なのではないか**, ということで **Julia カーネルを指定してみたところ, HTML 版のみオプションも含め動作した**. R Markdown では **JuliaCall** というパッケージを使い Julia コードのチャンクを書くことができるが, 現在はグラフの表示がうまくいかなかったりと制約が多い. しかし Quarto ではそのような問題は見られなかった.^[実際には, 現時点では Gadfly.jl のグラフがどうしてもSVGで保存されてしまうため, PDF 形式で保存するのが少し面倒である. PDFのみの処理を場合分けして作れば動作するだろうが, 面倒だったので作らなかった.]
 
-Jupyter カーネルはかなりいろいろな言語に対応している^[https://github.com/jupyter/jupyter/wiki/Jupyter-kernels]が, 実際にこのレポート作成などと相性がよさそうなのは R, Julia, Matlab, Octave あたりぐらいだと思うが後二者は持ってない & ほとんど使ってないので R と Julia の例のみ付録した.^[なお, カーネルの名称は `jupyter kernelspec list` で一覧を表示できる.]
+Jupyter カーネルはかなりいろいろな言語に対応している^[<https://github.com/jupyter/jupyter/wiki/Jupyter-kernels>]が, 実際にこのレポート作成などと相性がよさそうなのは R, Julia, Matlab, Octave あたりぐらいだと思うが後二者は持ってない & ほとんど使ってないので R と Julia の例のみ付録した.^[なお, カーネルの名称は `jupyter kernelspec list` で一覧を表示できる.]
 
-なお, Julia 側のインターフェースも作ってるようだ (おそらく作りかけなので未検証): https://github.com/quarto-dev/quarto-julia
+なお, Julia 側のインターフェースも作ってるようだ (おそらく作りかけなので未検証): <https://github.com/quarto-dev/quarto-julia>
 
 # 現時点での制約
 
@@ -409,7 +414,7 @@ pdf-engine: lualatex
 * 『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』
 * 『[メモ: Pandoc+LaTeXで気軽に日本語PDFを出力する - Qiita](https://qiita.com/sky_y/items/15bf7737f4b37da50372#%E6%96%B9%E6%B3%952-3-bxjscls%E3%81%A7-cjkmainfont%E5%A4%89%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95)』
 
-`CJKmainfont` などを使う場合も確かに日本語フォントを指定し表示させられるが, 現在ではややバッドノウハウと思える. CJKfont は中国語の組版を想定したもの (xeCJK) であり, 日本語環境を想定した設定ではないため, 微妙に不自然になることがある (~~zxjatype も組版設定が甘いのでそこばかりしつこく突くのもフェアではないが~~). 現状一番簡単な設定の書き方として, これらの記事の下のほうでも少し紹介されている bxjscls シリーズの文書クラスを使うことをお薦めする. 現在は特にプリアンブルを書き換えたりしなくともエラーが発生しないようになっている (はず). このあたりの仕様が変わったのは比較的最近なので, 2-3数年前の記事だとあまり反映されていないのだろう.
+`CJKmainfont` などを使う場合も確かに日本語フォントを指定し表示させられるが, 現在ではややバッドノウハウと思える. CJKfont は中国語の組版を想定したもの (xeCJK) であり, 日本語環境を想定した設定ではないため, 微妙に不自然になることがある (~~zxjatype も組版設定が甘いのでそこばかりしつこく突くのもフェアではないが~~). 現状一番簡単な設定の書き方として,  私が最初に提示した, そしてこれらの記事の下のほうでも少し紹介されている bxjscls シリーズの文書クラスを使うことをお薦めする. 現在は特にプリアンブルを書き換えたりしなくともエラーが発生しないようになっている (はず). このあたりの仕様が変わったのは比較的最近なので, 2-3年前の記事だとあまり反映されていないのだろう.
 
 ただし, もしこのプリセットが納得行かず, 3種類のフォントでそれぞれ違う系統のものを使いたい場合はこの限りではない (しかしその場合も bxjscls でプリセットを指定した上で上書きしたほうが使いやすいはずである). 
 

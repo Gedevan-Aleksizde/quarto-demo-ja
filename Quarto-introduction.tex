@@ -175,7 +175,6 @@
 \addcontentsline{toc}{section}{概要}
 
 \begin{itemize}
-\tightlist
 \item
   \href{https://quarto.org/}{Quarto} という R Markdown
   のような動的ドキュメント生成プログラムが開発中
@@ -193,9 +192,11 @@
 \item
   付録としてプレゼンテーション資料への変換, Jupyter Notebook
   の変換例も用意した
+
+  \url{https://github.com/Gedevan-Aleksizde/quarto-demo-ja}
 \end{itemize}
 
-\begin{tcolorbox}[colframe=quarto-callout-caution-color, colbacktitle=quarto-callout-caution-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}注意, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}注意, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-caution-color, colbacktitle=quarto-callout-caution-color!10!white]
 Quarto
 は最近公開されたばかりで開発中なので\textbf{ここの記述もすぐ時代遅れになる可能性がある}ことに注意してほしい.
 
@@ -365,7 +366,7 @@ R Markdown ユーザなら以下の書き方がこれまで不可能であった
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tcolorbox}[colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white]
 ただし, Quarto の実行オプションと knitr
 のチャンクオプションは似ているが完全互換ではないようだ. (例:
 \texttt{fig.cap} と \texttt{fig-cap}) しかし knitr
@@ -622,7 +623,7 @@ Jupyter カーネルも対応している, あるいは将来そうする予定�
   PDFのみの処理を場合分けして作れば動作するだろうが,
   面倒だったので作らなかった.}
 
-Jupyter カーネルはかなりいろいろな言語に対応している\footnote{https://github.com/jupyter/jupyter/wiki/Jupyter-kernels}が,
+Jupyter カーネルはかなりいろいろな言語に対応している\footnote{\url{https://github.com/jupyter/jupyter/wiki/Jupyter-kernels}}が,
 実際にこのレポート作成などと相性がよさそうなのは R, Julia, Matlab,
 Octave あたりぐらいだと思うが後二者は持ってない \&
 ほとんど使ってないので R と Julia の例のみ付録した.\footnote{なお,
@@ -631,7 +632,7 @@ Octave あたりぐらいだと思うが後二者は持ってない \&
 
 なお, Julia 側のインターフェースも作ってるようだ
 (おそらく作りかけなので未検証):
-https://github.com/quarto-dev/quarto-julia
+\url{https://github.com/quarto-dev/quarto-julia}
 
 \hypertarget{ux73feux6642ux70b9ux3067ux306eux5236ux7d04}{%
 \section{現時点での制約}\label{ux73feux6642ux70b9ux3067ux306eux5236ux7d04}}
@@ -805,7 +806,7 @@ Jupyter は元から Markdown セルを使用できるため, Markdown セル内
 qmd/Rmd の地の文に対応する. 出力オプションも R の場合と同様に notebook
 のセル内に実行オプションを書くことで適用される.
 
-\begin{tcolorbox}[colframe=quarto-callout-important-color, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}重要, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}重要, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-important-color, colbacktitle=quarto-callout-important-color!10!white]
 R Markdown はデフォルトの設定では Knit 時に全てのチャンクを実行するが,
 \texttt{.ipynb} ファイルに対して \texttt{quarto\ render}
 を使っただけでは\textbf{セルが再実行されず}, \texttt{.ipynb}
@@ -849,7 +850,7 @@ Python と Markdown 以外にする方法が分かりづらいが, セル右下�
 
 ドキュメントの生成方法は通常の Juypter と同じ.
 
-\begin{tcolorbox}[colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, bottomrule=.15mm, titlerule=0mm, toptitle=1mm, toprule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, coltitle=black, rightrule=.15mm, leftrule=.75mm, arc=.35mm, colback=white, left=2mm]
+\begin{tcolorbox}[titlerule=0mm, coltitle=black, left=2mm, bottomtitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulbO}\hspace{0.5em}Tip, bottomrule=.15mm, arc=.35mm, toptitle=1mm, colback=white, leftrule=.75mm, rightrule=.15mm, toprule=.15mm, colframe=quarto-callout-tip-color, colbacktitle=quarto-callout-tip-color!10!white]
 インタラクティブモードではセルの種類を指定できないので使えない?
 \end{tcolorbox}
 
@@ -1099,12 +1100,12 @@ XeLaTeX を使用したほうが良いだろう.
 (xeCJK) であり, 日本語環境を想定した設定ではないため,
 微妙に不自然になることがある (\sout{zxjatype
 も組版設定が甘いのでそこばかりしつこく突くのもフェアではないが}).
-現状一番簡単な設定の書き方として,
-これらの記事の下のほうでも少し紹介されている bxjscls
+現状一番簡単な設定の書き方として, 私が最初に提示した,
+そしてこれらの記事の下のほうでも少し紹介されている bxjscls
 シリーズの文書クラスを使うことをお薦めする.
 現在は特にプリアンブルを書き換えたりしなくともエラーが発生しないようになっている
 (はず). このあたりの仕様が変わったのは比較的最近なので,
-2-3数年前の記事だとあまり反映されていないのだろう.
+2-3年前の記事だとあまり反映されていないのだろう.
 
 ただし, もしこのプリセットが納得行かず,
 3種類のフォントでそれぞれ違う系統のものを使いたい場合はこの限りではない

@@ -137,18 +137,19 @@
 <header id="title-block-header">
 <h1 class="title display-7">Quarto が完成すると Jupyter でも R Markdown のように簡単にスライドや文書を作れるかもしれない</h1>
 <p class="author">ill-identified (片桐 智志)</p>
-<p class="date">2021/10/02</p>
+<p class="date">2021/10/03</p>
 </header>
 
 <section id="概要" class="level1 unnumbered">
 <h1 class="unnumbered">概要</h1>
 <ul>
-<li><a href="https://quarto.org/">Quarto</a> という R Markdown のような動的ドキュメント生成プログラムが開発中</li>
-<li>まだ開発版だが野心的な機能をめざしているらしい</li>
-<li>単なる R Markdown の再設計ではなく, <strong>Jupyter Notebook の変換にも対応</strong>している</li>
-<li>R や Python だけでなく Jupyter カーネルで使える任意の言語でも R Markdown のように扱えるかもしれない</li>
-<li>使い方の参考になるように<strong>この投稿も Quarto を利用して書いている</strong></li>
-<li>付録としてプレゼンテーション資料への変換, Jupyter Notebook の変換例も用意した</li>
+<li><p><a href="https://quarto.org/" target="_blank" rel="external">Quarto</a> という R Markdown のような動的ドキュメント生成プログラムが開発中</p></li>
+<li><p>まだ開発版だが野心的な機能をめざしているらしい</p></li>
+<li><p>単なる R Markdown の再設計ではなく, <strong>Jupyter Notebook の変換にも対応</strong>している</p></li>
+<li><p>R や Python だけでなく Jupyter カーネルで使える任意の言語でも R Markdown のように扱えるかもしれない</p></li>
+<li><p>使い方の参考になるように<strong>この投稿も Quarto を利用して書いている</strong></p></li>
+<li><p>付録としてプレゼンテーション資料への変換, Jupyter Notebook の変換例も用意した</p>
+<p><a href="https://github.com/Gedevan-Aleksizde/quarto-demo-ja" class="uri" target="_blank" rel="external">https://github.com/Gedevan-Aleksizde/quarto-demo-ja</a></p></li>
 </ul>
 <div class="callout-caution callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -167,15 +168,15 @@
 </section>
 <section id="はじめに" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> はじめに</h1>
-<p>最近公開された <a href="https://quarto.org/">Quarto</a> というソフト, 最初はごちゃごちゃしてわかりにくかった R Markdown の YAML メタデータのフォーマットをすっきりさせただけと思っていたが, それどころではないということがわかってきたので紹介してみる. ただし, 現時点ではまだ開発が始まったばかりであり, 頻繁に更新され, 細かなバグも多くやや不安定である.</p>
-<p>そんな不安定な状況でなんで公開したか. 自分もこれに数ヶ月前に関心を持ち, 興味深いとは思いつつも, もう少し安定してきてから紹介しようかと思っていた. しかし昨日リリースされた, <strong>knitr</strong> v1.35 の<a href="https://github.com/yihui/knitr/blob/master/NEWS.md">NEWS</a> を見ると, あきらかに Quarto を意識したように見える機能追加が行われていた. RStudio 的には結構本気で<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>取り組んでいるプロジェクトなのかもしれない. 公式ドキュメントも久々に見返すと以前よりさらに充実していたので, そろそろ紹介してみるタイミングかと思い公開してみた.</p>
+<p>最近公開された <a href="https://quarto.org/" target="_blank" rel="external">Quarto</a> というソフト, 最初はごちゃごちゃしてわかりにくかった R Markdown の YAML メタデータのフォーマットをすっきりさせただけと思っていたが, それどころではないということがわかってきたので紹介してみる. ただし, 現時点ではまだ開発が始まったばかりであり, 頻繁に更新され, 細かなバグも多くやや不安定である.</p>
+<p>そんな不安定な状況でなんで公開したか. 自分もこれに数ヶ月前に関心を持ち, 興味深いとは思いつつも, もう少し安定してきてから紹介しようかと思っていた. しかし昨日リリースされた, <strong>knitr</strong> v1.35 の<a href="https://github.com/yihui/knitr/blob/master/NEWS.md" target="_blank" rel="external">NEWS</a> を見ると, あきらかに Quarto を意識したように見える機能追加が行われていた. RStudio 的には結構本気で<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>取り組んでいるプロジェクトなのかもしれない. 公式ドキュメントも久々に見返すと以前よりさらに充実していたので, そろそろ紹介してみるタイミングかと思い公開してみた.</p>
 <p>Quarto の動作確認は以下のような環境で行った.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 開発版ではあるが, ドキュメントは既にそれなりに充実しており, R Markdown 使用者なら想像で補って書けるところも多い.</p>
 <ul>
 <li>Ubuntu 20.04<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
 <li>R 4.1.1</li>
 <li>RStudio 2021.09.0 Build 351</li>
 <li>Pandoc: 上記最新版 RStudio に同梱されているもの (v2.14.0.3) を使用</li>
-<li>Quarto <a href="https://github.com/quarto-dev/quarto-cli/releases/tag/v0.2.178">v0.2 Build 178</a></li>
+<li>Quarto <a href="https://github.com/quarto-dev/quarto-cli/releases/tag/v0.2.178" target="_blank" rel="external">v0.2 Build 178</a></li>
 <li><strong>knitr</strong> 1.36<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
 <li>Jupyter 関連:
 <ul>
@@ -213,12 +214,12 @@
 <h2 data-number="2.3" class="anchored" data-anchor-id="yaml-メタデータの構文が使いやすくなった"><span class="header-section-number">2.3</span> YAML メタデータの構文が使いやすくなった</h2>
 <p>これは R Markdown 利用者でないと良さが分かりづらいかもしれない. それ以外のユーザにとっては, R Markdown 開発開始当時にはなかった, 最近の Pandoc で追加された機能 (v2.14 あたりに準拠?) をベースに, YAML メタデータで文書全般の設定を指定できる, という程度の認識で良いと思う.</p>
 <p>以下, R Markdown ユーザを想定とした解説.</p>
-<p>以前『<a href="https://ill-identified.hatenablog.com/entry/2020/09/05/202403">R Markdown の YAML ヘッダでハマったおまえのための記事</a>』と題して書いたように, R Markdown の YAML メタデータは Pandoc が使用する項目と, <strong>knitr</strong> や <strong>rmarkdown</strong> パッケージが参照する項目が複雑に入り混じっていて, 初学者を混乱させる可能性があった. Quarto ではこのようなメタデータの構造が一新され, かなり洗練された. 例えば <code>header-includes</code> のように, 従来は HTML や PDF の出力ごとに個別設定できない項目というのがいくつもあった. 複数媒体でレイアウトを揃えようとするとこの制約が邪魔になることが結構あったのだが, Quarto では <code>format</code> フィールド以下にネストすることで, 出力フォーマットごとに設定できたりする. knitr のデフォルトのチャンクオプション (Quarto では Execution options と呼ばれる) もほぼ全て YAML メタデータの <code>execute</code> フィールドに書くことができるようだ (以前はこれもまた <code>knitr::opts_chunk$set()</code> と YAML メタデータ内の項目とで重複があったり複雑だった).</p>
+<p>以前『<a href="https://ill-identified.hatenablog.com/entry/2020/09/05/202403" target="_blank" rel="external">R Markdown の YAML ヘッダでハマったおまえのための記事</a>』と題して書いたように, R Markdown の YAML メタデータは Pandoc が使用する項目と, <strong>knitr</strong> や <strong>rmarkdown</strong> パッケージが参照する項目が複雑に入り混じっていて, 初学者を混乱させる可能性があった. Quarto ではこのようなメタデータの構造が一新され, かなり洗練された. 例えば <code>header-includes</code> のように, 従来は HTML や PDF の出力ごとに個別設定できない項目というのがいくつもあった.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 複数媒体でレイアウトを揃えようとするとこの制約が邪魔になることが結構あったのだが, Quarto では <code>format</code> フィールド以下にネストすることで, 出力フォーマットごとに設定できたりする. knitr のデフォルトのチャンクオプション (Quarto では Execution options と呼ばれる) もほぼ全て YAML メタデータの <code>execute</code> フィールドに書くことができるようだ (以前はこれもまた <code>knitr::opts_chunk$set()</code> と YAML メタデータ内の項目とで重複があったり複雑だった).</p>
 <p>R Markdown ユーザなら以下の書き方がこれまで不可能であったこと, そして可能だったらどれだけ便利かわかるかもしれない.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">header-incldues</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">      \usepackage[HiraginoMincho]{zxjafont}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">      \usepackage[hiragino-pro]{zxjafont}</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">execute</span><span class="kw">:</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">echo</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
@@ -239,10 +240,10 @@ Tip
 <p>ただし, Quarto の実行オプションと knitr のチャンクオプションは似ているが完全互換ではないようだ. (例: <code>fig.cap</code> と <code>fig-cap</code>) しかし knitr エンジンでは実行オプションと knitr のチャンクオプション両方が使えるようで, 少し混乱するかもしれない.</p>
 </div>
 </div>
-<p>さらに, <code>editor_options</code> というフィールドで, 編集時の挙動や, Pandoc 変換時の文書全般の設定をわかりやすく制御できるようになった.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> その中には参考文献の表示位置 (セクション末尾ごとか, 巻末にまとめてか) とか自動折返しの文字数などが含まれている.</p>
+<p>さらに, <code>editor_options</code> というフィールドで, 編集時の挙動や, Pandoc 変換時の文書全般の設定をわかりやすく制御できるようになった.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> その中には参考文献の表示位置 (セクション末尾ごとか, 巻末にまとめてか) とか自動折返しの文字数などが含まれている.</p>
 <section id="uplatex-の使用もしやすくなりそう" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="uplatex-の使用もしやすくなりそう"><span class="header-section-number">2.3.1</span> (u)pLaTeX の使用もしやすくなりそう</h3>
-<p>R Markdown では TinyTeX の latexmk エミュレーション機能 (<code>tinytex::latexmk</code> 関数) を利用して LaTeX のコンパイルを行っていた. しかし R Markdown 側が (u)pLaTeX の使用を想定していなかったので, 昔からのコード資産 (例えば科研費LaTeXとか?) に頼っていて XeLaTeX や LuaLaTeX に移行できない人にとってはやりづらかった. YAML メタデータを一新したことで, メタデータ上でこの辺の制御も設定できるようになった.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>R Markdown では TinyTeX の latexmk エミュレーション機能 (<code>tinytex::latexmk</code> 関数) を利用して LaTeX のコンパイルを行っていた. しかし R Markdown 側が (u)pLaTeX の使用を想定していなかったので, 昔からのコード資産 (例えば科研費LaTeXとか?) に頼っていて XeLaTeX や LuaLaTeX に移行できない人にとってはやりづらかった. YAML メタデータを一新したことで, メタデータ上でこの辺の制御も設定できるようになった.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 </section>
 </section>
 <section id="新しい記法のチャンクオプション" class="level2" data-number="2.4">
@@ -296,12 +297,12 @@ Tip
 </div>
 </div>
 <p>セクション見出しへの相互参照も, 見出し側に <code>{#sec-&lt;ラベル名&gt;}</code> のように指定すれば, <a href="#sec-crossref">セクション 2.4.1</a> というふうに参照できる.</p>
-<p>相互参照に関する詳しい話は公式の <a href="https://quarto.org/docs/authoring/cross-references.html">Cross References</a> のセクションを見てほしい.</p>
+<p>相互参照に関する詳しい話は公式の <a href="https://quarto.org/docs/authoring/cross-references.html" target="_blank" rel="external">Cross References</a> のセクションを見てほしい.</p>
 </section>
 </section>
 <section id="sec-jupyter-vs-code" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="sec-jupyter-vs-code"><span class="header-section-number">2.5</span> Jupyter や VS Code への対応</h2>
-<p>私自身は Jupyter をあまり好まないが, これが利用者層を増やす可能性が一番ありそうな, <strong>大きな特徴</strong>であるとも思う. Jupytyter(lab) は IDE としてもドキュメントエディタとしてみても機能がどっちつかずなので (この辺の不満を書いていたらとても長くなったので脚注にした<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>), Jupyter にも knitr のチャンクオプションのような機能が用意され, 簡単にソースコードの表示を切り替えたりできないか, あるいは公式に互換性をサポートしてくれたら良いなと思いながら実現されないので私は Jupyter を使わない作業スタイルを追求し続けていたが, 先に Quarto がこれを実現することになりそうだ.</p>
+<p>私自身は Jupyter をあまり好まないが, これが利用者層を増やす可能性が一番ありそうな, <strong>大きな特徴</strong>であるとも思う. Jupytyter(lab) は IDE としてもドキュメントエディタとしてみても機能がどっちつかずなので (この辺の不満を書いていたらとても長くなったので脚注にした<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>), Jupyter にも knitr のチャンクオプションのような機能が用意され, 簡単にソースコードの表示を切り替えたりできないか, あるいは公式に互換性をサポートしてくれたら良いなと思いながら実現されないので私は Jupyter を使わない作業スタイルを追求し続けていたが, 先に Quarto がこれを実現することになりそうだ.</p>
 <p>Quarto は Jupyter でも Rmarkdown のチャンクオプションと似た機能を提供するため, <strong>実行オプション</strong> (Execution Options) という機能を用意している. これによって,</p>
 <ul>
 <li>長大なコードを折りたたんで出力する (クリックで展開するアレ)</li>
@@ -318,12 +319,12 @@ Tip
 </figure>
 </div>
 <p>同様に, VS Code の Jupyter Notebook インターフェイス上でも Quarto を使用できるようだ. Google Colaboratory も ipynb 形式でファイルをダウンロードすればたぶん使えると思う (普段使わないので詳細は不明).</p>
-<p>(実は先日公開した <a href="https://ill-identified.hatenablog.com/entry/2021/08/06/200859">Pysocviz</a> も, notebook で用例を作成した上で Quarto で PDFなどの静的なドキュメントに変換しようと考えていたが, 開発版で不安定なのでメンテが大変になるかもと思い直してやめたという経緯がある.)</p>
+<p>(実は先日公開した <a href="https://ill-identified.hatenablog.com/entry/2021/08/06/200859" target="_blank" rel="external">Pysocviz</a> も, notebook で用例を作成した上で Quarto で PDFなどの静的なドキュメントに変換しようと考えていたが, 開発版で不安定なのでメンテが大変になるかもと思い直してやめたという経緯がある.)</p>
 <section id="多様な-jupyter-カーネルへの対応" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="多様な-jupyter-カーネルへの対応"><span class="header-section-number">2.5.1</span> 多様な Jupyter カーネルへの対応</h3>
-<p>Jupyter への対応についてもう1つ強調すべきは, Quarto 文書ファイルの新規作成時の設定項目に Jupyter カーネルを指定する <code>jupyter</code> という項目があること. 公式ドキュメントでは Python の例しかなかったが, このような項目があるということは, 公式ドキュメントには明記していないものの <strong>Quarto は Python 以外の Jupyter カーネルも対応している, あるいは将来そうする予定なのではないか</strong>, ということで <strong>Julia カーネルを指定してみたところ, HTML 版のみオプションも含め動作した</strong>. R Markdown では <strong>JuliaCall</strong> というパッケージを使い Julia コードのチャンクを書くことができるが, 現在はグラフの表示がうまくいかなかったりと制約が多い. しかし Quarto ではそのような問題は見られなかった.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
-<p>Jupyter カーネルはかなりいろいろな言語に対応している<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>が, 実際にこのレポート作成などと相性がよさそうなのは R, Julia, Matlab, Octave あたりぐらいだと思うが後二者は持ってない &amp; ほとんど使ってないので R と Julia の例のみ付録した.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
-<p>なお, Julia 側のインターフェースも作ってるようだ (おそらく作りかけなので未検証): https://github.com/quarto-dev/quarto-julia</p>
+<p>Jupyter への対応についてもう1つ強調すべきは, Quarto 文書ファイルの新規作成時の設定項目に Jupyter カーネルを指定する <code>jupyter</code> という項目があること. 公式ドキュメントでは Python の例しかなかったが, このような項目があるということは, 公式ドキュメントには明記していないものの <strong>Quarto は Python 以外の Jupyter カーネルも対応している, あるいは将来そうする予定なのではないか</strong>, ということで <strong>Julia カーネルを指定してみたところ, HTML 版のみオプションも含め動作した</strong>. R Markdown では <strong>JuliaCall</strong> というパッケージを使い Julia コードのチャンクを書くことができるが, 現在はグラフの表示がうまくいかなかったりと制約が多い. しかし Quarto ではそのような問題は見られなかった.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>Jupyter カーネルはかなりいろいろな言語に対応している<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>が, 実際にこのレポート作成などと相性がよさそうなのは R, Julia, Matlab, Octave あたりぐらいだと思うが後二者は持ってない &amp; ほとんど使ってないので R と Julia の例のみ付録した.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>なお, Julia 側のインターフェースも作ってるようだ (おそらく作りかけなので未検証): <a href="https://github.com/quarto-dev/quarto-julia" class="uri" target="_blank" rel="external">https://github.com/quarto-dev/quarto-julia</a></p>
 </section>
 </section>
 </section>
@@ -331,7 +332,7 @@ Tip
 <h1 data-number="3"><span class="header-section-number">3</span> 現時点での制約</h1>
 <p>現時点で気になった点・注意点を挙げていく. まだ開発版なのでおそらく今後どんどん不具合が修正され機能も追加されていくとは思うが.</p>
 <ul>
-<li>グラフィックデバイスの扱いが不明瞭. 日本語ユーザにとって現状これが一番ネックな気がする. <a href="https://ill-identified.hatenablog.com/entry/2021/09/10/231230">最近書いた</a>ように Windows や Mac でグラフに書いた日本語を文字化けさせないためには <strong>ragg</strong> パッケージのデバイス関数や <code>cairo_pdf</code> が使えるといいのだが, 指定方法がはっきり書かれていない. 現状は <code>.qmd</code> ならば <code>#| dev: cairo_pdf</code> のように書けば適用されるようだが, 一方で YAML メタデータの <code>execute:</code> に書いても認識されないようだ (Quarto ではなく <strong>knitr</strong> の機能が適用されている?).</li>
+<li>グラフィックデバイスの扱いが不明瞭. 日本語ユーザにとって現状これが一番ネックな気がする. <a href="https://ill-identified.hatenablog.com/entry/2021/09/10/231230" target="_blank" rel="external">最近書いた</a>ように Windows や Mac でグラフに書いた日本語を文字化けさせないためには <strong>ragg</strong> パッケージのデバイス関数や <code>cairo_pdf</code> が使えるといいのだが, 指定方法がはっきり書かれていない. 現状は <code>.qmd</code> ならば <code>#| dev: cairo_pdf</code> のように書けば適用されるようだが, 一方で YAML メタデータの <code>execute:</code> に書いても認識されないようだ (Quarto ではなく <strong>knitr</strong> の機能が適用されている?).</li>
 <li>YAML メタデータのブール値で <code>yes</code>/<code>no</code> が使えない. <code>true</code>/<code>false</code> のみ</li>
 <li>R Markdown の出力フォーマット関数に対応するものがない
 <ul>
@@ -350,7 +351,7 @@ Tip
 </section>
 <section id="quarto-の導入方法" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Quarto の導入方法</h1>
-<p>Quarto の導入に特に難しいことはないが, 上記のように開発版であるため動作が不安定である可能性が高いことには注意してほしい. Quarto はすでに公式ドキュメントがある程度充実しており, <a href="https://quarto.org/docs/getting-started/installation.html">インストール方法に関するページ</a> も作られているので, ここでは多くを書かない. GitHub から Quarto CLI の最新のリリースをダウンロードする. <code>.deb</code>, <code>.pkg</code>, <code>.msi</code> の3通りのバイナリ/インストーラが用意されているので, 主要な OS は簡単にインストールできる. Quarto CLI 単体だとターミナルでの呼び出しでしか使えないため, 「Pandoc の機能拡張版」というような認識で良いだろう. インストールできたら, RStudio を再起動すると新規作成ファイルの一覧に “Quarto Doc” が追加されているはずであるので選択する. R 側で操作するための <strong>quarto</strong> パッケージもインストールが必要である.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>Quarto の導入に特に難しいことはないが, 上記のように開発版であるため動作が不安定である可能性が高いことには注意してほしい. Quarto はすでに公式ドキュメントがある程度充実しており, <a href="https://quarto.org/docs/getting-started/installation.html" target="_blank" rel="external">インストール方法に関するページ</a> も作られているので, ここでは多くを書かない. GitHub から Quarto CLI の最新のリリースをダウンロードする. <code>.deb</code>, <code>.pkg</code>, <code>.msi</code> の3通りのバイナリ/インストーラが用意されているので, 主要な OS は簡単にインストールできる. Quarto CLI 単体だとターミナルでの呼び出しでしか使えないため, 「Pandoc の機能拡張版」というような認識で良いだろう. インストールできたら, RStudio を再起動すると新規作成ファイルの一覧に “Quarto Doc” が追加されているはずであるので選択する. R 側で操作するための <strong>quarto</strong> パッケージもインストールが必要である.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
 <p>その他 TeX や Pandoc の設定が必要な場合もあるが, R Markdown を既に使っているならその設定を引き継げることが多いので説明は省略する. Jupyter 上で使いたい場合はもちろん Python や Jupyter が使えるようにする必要がある. これらの環境設定の多くはターミナルの <code>quarto</code> コマンドで確認できる.</p>
 <section id="rstudio-上での使用法" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="rstudio-上での使用法"><span class="header-section-number">4.1</span> RStudio 上での使用法</h2>
@@ -396,7 +397,7 @@ Tip
 </section>
 <section id="vs-code-上で-jupyter-を操作する場合" class="level3" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="vs-code-上で-jupyter-を操作する場合"><span class="header-section-number">4.1.3</span> VS Code 上で Jupyter を操作する場合</h3>
-<p>公式ドキュメントの該当箇所: <a href="https://quarto.org/docs/tools/vscode.html" class="uri">https://quarto.org/docs/tools/vscode.html</a></p>
+<p>公式ドキュメントの該当箇所: <a href="https://quarto.org/docs/tools/vscode.html" class="uri" target="_blank" rel="external">https://quarto.org/docs/tools/vscode.html</a></p>
 <p>VS Code で Python 拡張機能を入れていれば Jupyter Notebook が扱える. ここでもセルに出力オプションを書いたり YAML フロントマターを書いたりできる. VS Code のエディタではセルの使用言語を Python と Markdown 以外にする方法が分かりづらいが, セル右下の <code>[Python]</code> とか <code>[Markdown]</code> とか表示されている箇所をクリックすればドロップダウンリストが出てくるので, “raw” を選べば YAML メタデータとして認識される (<a href="#fig-vs-code">図 6</a>).</p>
 <div id="fig-vs-code" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -435,7 +436,7 @@ Tip
 <section id="付録-各種設定での出力例" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> 付録: 各種設定での出力例</h1>
 <ul>
-<li>冒頭に書いたようにこの投稿は Quarto で生成したものだが, R Markdown および Quarto の強みは同一のソースを少し設定を変えるだけで Markdown や HTML や PDF の文書で生成できる点にある. よって, この同一のファイルで作成した例を <a href="https://github.com/Gedevan-Aleksizde/quarto-demo-ja">GitHub</a> に投稿しておいた. ただし, DOCX (Word) や PPTX (パワーポイント) は確認がめんどくさいので Libre Office でざっと閲覧したのみで細かく確認してない. 興味のある人だけ各々確認してほしい.</li>
+<li>冒頭に書いたようにこの投稿は Quarto で生成したものだが, R Markdown および Quarto の強みは同一のソースを少し設定を変えるだけで Markdown や HTML や PDF の文書で生成できる点にある. よって, この同一のファイルで作成した例を <a href="https://github.com/Gedevan-Aleksizde/quarto-demo-ja" target="_blank" rel="external">GitHub</a> に投稿しておいた. ただし, DOCX (Word) や PPTX (パワーポイント) は確認がめんどくさいので Libre Office でざっと閲覧したのみで細かく確認してない. 興味のある人だけ各々確認してほしい.</li>
 </ul>
 <p>まだ開発途上なので, 思ったよりうまく動作しない箇所も多い. ちょっと遠回りな方法で解決できそうなケースもあったが, 将来のアップデートで使いやすくなることを期待して放置した.</p>
 <ul>
@@ -450,7 +451,7 @@ Tip
 <li><code>Jupyter-slide/</code> は脚注で Jupyter や RISE の機能を批判しまくったので, 責任を取るべく Quarto ではスライド資料をより簡単に作れると実証したものである. カーネルは Python を使っている. PDF (beamer), PPTX, HTML (revealjs) の設定をしてあるが, 実際やってみたら HTML の出力はあまりよろしくなかった. pandas の出力はうまく表示できないが, Markdown の表はたぶん表示できると思う.</li>
 <li><code>Knitr-slide/*</code> は <code>.qmd</code> でスライドを作成する場合の例である. こちらは R を使っているので, 従来の R Markdown と比較してみてほしい.</li>
 </ul>
-<p>公式ドキュメントでも<a href="https://quarto.org/docs/gallery/">いくつかの使用例</a>が紹介されている.</p>
+<p>公式ドキュメントでも<a href="https://quarto.org/docs/gallery/" target="_blank" rel="external">いくつかの使用例</a>が紹介されている.</p>
 </section>
 <section id="補足-r-markdown-と-quarto-の-latex-設定の比較" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> 補足: R Markdown と Quarto の LaTeX 設定の比較</h1>
@@ -473,17 +474,17 @@ Tip
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ja=standard</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> jafont=haranoaji</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf-engine</span><span class="kw">:</span><span class="at"> lualatex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>どちらもほぼ Pandoc の引数に対応させているだけなので, 結果として同じになる. また, 文書クラスに <code>bxjsarticle</code> を使用<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>することで, 日本語フォントの設定も簡単にしている.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> <a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> 上記では LuaLaTeX を使用しているが, XeLaTeX でも動作するはずである. これは <code>bxjsarticle</code> が自動的にそれぞれのエンジンでの組版に必要なパッケージを読み込んでくれるためである. プリセットが気に入らず, メインフォント, サンセリフフォントなどを個別に設定したい, ウエイトを調整したいという場合は LaTeX コマンドで追加設定する必要がある. この設定は XeLaTeX か LuaLaTeX かで変わってくる. 前者は zxjatype を, 後者は luatex-ja のマニュアルを参考にしてほしい.</p>
+<p>どちらもほぼ Pandoc の引数に対応させているだけなので, 結果として同じになる. また, 文書クラスに <code>bxjsarticle</code> を使用<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>することで, 日本語フォントの設定も簡単にしている.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> <a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> 上記では LuaLaTeX を使用しているが, XeLaTeX でも動作するはずである. これは <code>bxjsarticle</code> が自動的にそれぞれのエンジンでの組版に必要なパッケージを読み込んでくれるためである. プリセットが気に入らず, メインフォント, サンセリフフォントなどを個別に設定したい, ウエイトを調整したいという場合は LaTeX コマンドで追加設定する必要がある. この設定は XeLaTeX か LuaLaTeX かで変わってくる. 前者は zxjatype を, 後者は luatex-ja のマニュアルを参考にしてほしい.</p>
 <p>しかし, 現在は <code>xelatex</code> よりも <code>lualatex</code> の使用を推奨する. 理由は以下の2つ.</p>
 <ol type="1">
-<li><a href="https://zrbabbler.hatenablog.com/entry/2020/02/09/223244">zxjatype 作者が述懐</a>するように, XeLaTeX を選択した場合に使われる <code>zxjatype</code> の組版はあまり厳格ではない</li>
+<li><a href="https://zrbabbler.hatenablog.com/entry/2020/02/09/223244" target="_blank" rel="external">zxjatype 作者が述懐</a>するように, XeLaTeX を選択した場合に使われる <code>zxjatype</code> の組版はあまり厳格ではない</li>
 <li>LuaLaTeX は以前から (up-TeX や XeLaTeX と比べ) 処理が遅いと言われているが, TinyTeX を使用する環境では LuaLaTeX の遅さ以外にボトルネックがあるのであまり気にならない</li>
 </ol>
 <p>ただし, beamer に関しては逆に禁則処理が厳格でなくても気になることがあまりなく, かつ人気のある metropolis テーマは XeLaTeX での動作を想定しているので XeLaTeX を使用したほうが良いだろう.</p>
 <p>なお, ネット上では別のパターンの設定も存在するので, 蛇足気味だがそのあたりの違いについても書いておく.</p>
-<p>例えば, 『<a href="https://nonki1974.hateblo.jp/entry/2020/02/19/130138">TinyTeXのインストール &amp; RmarkdownでPDF on Windows10</a>』というページ. この設定例であればタイトルの Windows 10 に限らず比較的他のOSでも動作しやすい. ただし誤りでないがいくつか注意が必要である.</p>
+<p>例えば, 『<a href="https://nonki1974.hateblo.jp/entry/2020/02/19/130138" target="_blank" rel="external">TinyTeXのインストール &amp; RmarkdownでPDF on Windows10</a>』というページ. この設定例であればタイトルの Windows 10 に限らず比較的他のOSでも動作しやすい. ただし誤りでないがいくつか注意が必要である.</p>
 <ul>
-<li>TinyTeX を R パッケージを使わずにインストールしてしまっている. R も使うのなら <strong>tinytex</strong> パッケージ経由でインストールしたほうが管理が簡単である (ブログ筆者は Atom で編集する想定のためこうした?). 詳細は<a href="https://gedevan-aleksizde.github.io/tinytex-doc-ja/index.html">私の翻訳した公式ドキュメント</a>参照.</li>
+<li>TinyTeX を R パッケージを使わずにインストールしてしまっている. R も使うのなら <strong>tinytex</strong> パッケージ経由でインストールしたほうが管理が簡単である (ブログ筆者は Atom で編集する想定のためこうした?). 詳細は<a href="https://gedevan-aleksizde.github.io/tinytex-doc-ja/index.html" target="_blank" rel="external">私の翻訳した公式ドキュメント</a>参照.</li>
 <li>Noto フォントで揃える場合は <code>header-includes:</code> 以下は不要で, 上記のように, <code>classoption</code> 内で <code>jafont=noto</code> のようにプリセットを設定できる.
 <ul>
 <li>私の例では Noto ではなく TinyTeX からインストールできる原ノ味フォント (<code>haranoaji</code>) を使用している. 私が <code>haranoaji</code> を指定しているのは, LuaLaTeX で Noto フォントを使う場合は <code>noto-otc</code> とか <code>noto-otf</code> とか名前が変わってややこしいため.</li>
@@ -492,10 +493,10 @@ Tip
 </ul>
 <p>さらに, 例えば以下のようなページではまた別の設定例が紹介されている.</p>
 <ul>
-<li>『<a href="https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/">R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する</a>』</li>
-<li>『<a href="https://qiita.com/sky_y/items/15bf7737f4b37da50372#%E6%96%B9%E6%B3%952-3-bxjscls%E3%81%A7-cjkmainfont%E5%A4%89%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95">メモ: Pandoc+LaTeXで気軽に日本語PDFを出力する - Qiita</a>』</li>
+<li>『<a href="https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/" target="_blank" rel="external">R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する</a>』</li>
+<li>『<a href="https://qiita.com/sky_y/items/15bf7737f4b37da50372#%E6%96%B9%E6%B3%952-3-bxjscls%E3%81%A7-cjkmainfont%E5%A4%89%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%86%E6%96%B9%E6%B3%95" target="_blank" rel="external">メモ: Pandoc+LaTeXで気軽に日本語PDFを出力する - Qiita</a>』</li>
 </ul>
-<p><code>CJKmainfont</code> などを使う場合も確かに日本語フォントを指定し表示させられるが, 現在ではややバッドノウハウと思える. CJKfont は中国語の組版を想定したもの (xeCJK) であり, 日本語環境を想定した設定ではないため, 微妙に不自然になることがある (<del>zxjatype も組版設定が甘いのでそこばかりしつこく突くのもフェアではないが</del>). 現状一番簡単な設定の書き方として, これらの記事の下のほうでも少し紹介されている bxjscls シリーズの文書クラスを使うことをお薦めする. 現在は特にプリアンブルを書き換えたりしなくともエラーが発生しないようになっている (はず). このあたりの仕様が変わったのは比較的最近なので, 2-3数年前の記事だとあまり反映されていないのだろう.</p>
+<p><code>CJKmainfont</code> などを使う場合も確かに日本語フォントを指定し表示させられるが, 現在ではややバッドノウハウと思える. CJKfont は中国語の組版を想定したもの (xeCJK) であり, 日本語環境を想定した設定ではないため, 微妙に不自然になることがある (<del>zxjatype も組版設定が甘いのでそこばかりしつこく突くのもフェアではないが</del>). 現状一番簡単な設定の書き方として, 私が最初に提示した, そしてこれらの記事の下のほうでも少し紹介されている bxjscls シリーズの文書クラスを使うことをお薦めする. 現在は特にプリアンブルを書き換えたりしなくともエラーが発生しないようになっている (はず). このあたりの仕様が変わったのは比較的最近なので, 2-3年前の記事だとあまり反映されていないのだろう.</p>
 <p>ただし, もしこのプリセットが納得行かず, 3種類のフォントでそれぞれ違う系統のものを使いたい場合はこの限りではない (しかしその場合も bxjscls でプリセットを指定した上で上書きしたほうが使いやすいはずである).</p>
 <p>その他, 多くのブログ等で</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">header-includes</span><span class="kw">:</span><span class="at"> </span></span>
@@ -519,16 +520,17 @@ Tip
 <li id="fn3" role="doc-endnote"><p>Quarto について実際に調べたのは数ヶ月前で, この記事公開に合わせて再度簡単に確認した程度<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4" role="doc-endnote"><p>Windows や Mac ではまったく動作確認していないが, WSL とか AWS とか RStudio Workbench とか使えば Ubuntu 環境を得るのは簡単なので省略<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5" role="doc-endnote"><p>1.36 は 1.35 の翌日にリリースされた…<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p><a href="https://quarto.org/docs/visual-editor/markdown.html#writer-options" class="uri">https://quarto.org/docs/visual-editor/markdown.html#writer-options</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7" role="doc-endnote"><p>動作保証はできないが, https://zrbabbler.hatenablog.com/entry/2019/05/06/235854 なんかを参考に対応する項目を YAML メタデータに設定したり <code>.latexmkrc</code> を用意したりすればできるかもしれない.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8" role="doc-endnote"><p>Jupyter Notebook (公式は今はもう Jupyter の開発を積極的には行わないので JupyterLab を使えと言っているが, 便利なプラグインのほとんどが使えなくなってしまったので私は JupyterLab を使っていない) は IDE としては機能が少なすぎるし, 「インタラクティブな開発環境」と自称するわりには Python はじめインタラクティブに扱える言語の特性を活かした機能が少ない. かと言ってドキュメントやレポートを作成するツールとして見ると, 長大なソースコードや警告メッセージがそのまま表示され, スライドとしての体をなさない, PDFエクスポート時のオプションがなさすぎるなど, 機能が貧弱である. Jupyter notebook をプレゼンテーションに変換する RISE という拡張機能があるが, R Markdown に比べると機能が少なすぎて使いづらい (というか相変わらずコードや警告を非表示にできない/難しい) ので諦めてしまった.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9" role="doc-endnote"><p>実際には, 現時点では Gadfly.jl のグラフがどうしてもSVGで保存されてしまうため, PDF 形式で保存するのが少し面倒である. PDFのみの処理を場合分けして作れば動作するだろうが, 面倒だったので作らなかった.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10" role="doc-endnote"><p>https://github.com/jupyter/jupyter/wiki/Jupyter-kernels<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11" role="doc-endnote"><p>なお, カーネルの名称は <code>jupyter kernelspec list</code> で一覧を表示できる.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12" role="doc-endnote"><p>必要だとは書いているが, 現時点ではなくても動作するのであまり気にする必要はないかもしれない. 中身を少し見た限りではドキュメントのエクスポートなどに関する関数ばかりで使わない人のほうが多そうである. RStudio ではなくコンソールのみで操作したい人向け?<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13" role="doc-endnote"><p>bxjscls というまとまりで, <code>bxjreport</code> や <code>bxjsbook</code> も存在するが, 以降は便宜上 <code>bxjsarticle</code> と表記する.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14" role="doc-endnote"><p>ここでは, 最近の TeX Live の標準日本語フォントである <code>haranoaji</code> (原ノ味) を指定している. OS ごとに標準日本語フォントが異なるため, OS依存をなくすためにこれを選択した. TeX Live 2020 以降ならそのままで使用でき, <strong>tinytex</strong> を使っているなら <code>tinytex::tlmgr_install(&quot;haranoaji&quot;)</code> でインストールできる.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15" role="doc-endnote"><p>この他にも <code>bxjsarticle</code> には, 1行あたりの文字数, 1ページあたりの行数を指定するオプションがあるという利点がある.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>指摘があったので補足: 工夫すれば <code>header-includes</code> でも出力ごとに競合しづらい書き方もできるが, ソースファイル1つで自己完結したい, 編集しやすくしたいという観点ではあまりおすすめできない<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p><a href="https://quarto.org/docs/visual-editor/markdown.html#writer-options" class="uri" target="_blank" rel="external">https://quarto.org/docs/visual-editor/markdown.html#writer-options</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p>動作保証はできないが, https://zrbabbler.hatenablog.com/entry/2019/05/06/235854 なんかを参考に対応する項目を YAML メタデータに設定したり <code>.latexmkrc</code> を用意したりすればできるかもしれない.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9" role="doc-endnote"><p>Jupyter Notebook (公式は今はもう Jupyter の開発を積極的には行わないので JupyterLab を使えと言っているが, 便利なプラグインのほとんどが使えなくなってしまったので私は JupyterLab を使っていない) は IDE としては機能が少なすぎるし, 「インタラクティブな開発環境」と自称するわりには Python はじめインタラクティブに扱える言語の特性を活かした機能が少ない. かと言ってドキュメントやレポートを作成するツールとして見ると, 長大なソースコードや警告メッセージがそのまま表示され, スライドとしての体をなさない, PDFエクスポート時のオプションがなさすぎるなど, 機能が貧弱である. Jupyter notebook をプレゼンテーションに変換する RISE という拡張機能があるが, R Markdown に比べると機能が少なすぎて使いづらい (というか相変わらずコードや警告を非表示にできない/難しい) ので諦めてしまった.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10" role="doc-endnote"><p>実際には, 現時点では Gadfly.jl のグラフがどうしてもSVGで保存されてしまうため, PDF 形式で保存するのが少し面倒である. PDFのみの処理を場合分けして作れば動作するだろうが, 面倒だったので作らなかった.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11" role="doc-endnote"><p><a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels" class="uri" target="_blank" rel="external">https://github.com/jupyter/jupyter/wiki/Jupyter-kernels</a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12" role="doc-endnote"><p>なお, カーネルの名称は <code>jupyter kernelspec list</code> で一覧を表示できる.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13" role="doc-endnote"><p>必要だとは書いているが, 現時点ではなくても動作するのであまり気にする必要はないかもしれない. 中身を少し見た限りではドキュメントのエクスポートなどに関する関数ばかりで使わない人のほうが多そうである. RStudio ではなくコンソールのみで操作したい人向け?<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14" role="doc-endnote"><p>bxjscls というまとまりで, <code>bxjreport</code> や <code>bxjsbook</code> も存在するが, 以降は便宜上 <code>bxjsarticle</code> と表記する.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15" role="doc-endnote"><p>ここでは, 最近の TeX Live の標準日本語フォントである <code>haranoaji</code> (原ノ味) を指定している. OS ごとに標準日本語フォントが異なるため, OS依存をなくすためにこれを選択した. TeX Live 2020 以降ならそのままで使用でき, <strong>tinytex</strong> を使っているなら <code>tinytex::tlmgr_install(&quot;haranoaji&quot;)</code> でインストールできる.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16" role="doc-endnote"><p>この他にも <code>bxjsarticle</code> には, 1行あたりの文字数, 1ページあたりの行数を指定するオプションがあるという利点がある.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <script type="application/javascript">
