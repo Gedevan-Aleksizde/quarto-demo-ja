@@ -1,0 +1,174 @@
+---
+title: "Quarto の日本語組版 PDF 文書設定 (upLaTeX + BXjscls 使用版)"
+format:
+  pdf:
+    documentclass: bxjsarticle
+    classoption:
+      - pandoc
+      - a4paper
+    cite-method: natbib
+latex-auto-mk: false
+pdf-engine: latexmk
+pdf-engine-opt:
+  - -pdfdvi
+  - -outdir=out-uptex
+crossref:
+  crossref:
+  fig-title: 図
+  tbl-title: 表
+  title-delim: ":"
+  fig-prefix: 図
+  tbl-prefix: 表
+  eq-prefix: 式
+  sec-prefix: セクション
+  ref-hyperlink: true
+bibliography: quarto.bib
+biblio-style: plainnat
+---
+
+## 概要
+
+Quarto で upLaTeX + upBibTeX を使い PDF を生成する. ただし現時点では BXjscls の文書クラスのみの対応. js シリーズを使いたい場合は, Pandoc テンプレートの修正も必要.
+
+# 事前準備
+
+[TeX Wiki](https://texwiki.texjp.org/?Latexmk) のページを参考に, `.latexmkrc` を設定する. 具体的には以下のような内容で作成してほしい.
+
+```sh
+#!/usr/bin/env perl
+if ($^O eq 'MSWin32') {
+  $latex = 'uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode %S';
+  $pdflatex = 'pdflatex %O -synctex=1 -interaction=nonstopmode %S';
+  $lualatex = 'lualatex %O -synctex=1 -interaction=nonstopmode %S';
+  $xelatex = 'xelatex %O -synctex=1 -interaction=nonstopmode %S';
+  $biber = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';
+  $bibtex = 'upbibtex %O %B';
+  $makeindex = 'upmendex %O -o %D %S';
+  $dvipdf = 'dvipdfmx %O -o %D %S';
+  $dvips = 'dvips %O -z -f %S | convbkmk -u > %D';
+  $ps2pdf = 'ps2pdf.exe %O %S %D';
+  $pdf_mode = 3;
+  if (-f 'C:/Program Files/SumatraPDF/SumatraPDF.exe') {
+    $pdf_previewer = '"C:/Program Files/SumatraPDF/SumatraPDF.exe" -reuse-instance';
+  } elsif (-f 'C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe') {
+    $pdf_previewer = '"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe" -reuse-instance';
+  } else {
+    $pdf_previewer = 'texworks';
+  }
+} else {
+  $latex = 'uplatex %O -synctex=1 -interaction=nonstopmode %S';
+  $pdflatex = 'pdflatex %O -synctex=1 -interaction=nonstopmode %S';
+  $lualatex = 'lualatex %O -synctex=1 -interaction=nonstopmode %S';
+  $xelatex = 'xelatex %O -synctex=1 -interaction=nonstopmode %S';
+  $biber = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';
+  $bibtex = 'upbibtex %O %B';
+  $makeindex = 'upmendex %O -o %D %S';
+  $dvipdf = 'dvipdfmx %O -o %D %S';
+  $dvips = 'dvips %O -z -f %S | convbkmk -u > %D';
+  $ps2pdf = 'ps2pdf %O %S %D';
+  $pdf_mode = 3;
+  if ($^O eq 'darwin') {
+    $pvc_view_file_via_temporary = 0;
+    $pdf_previewer = 'open -ga /Applications/Skim.app';
+  } else {
+    $pdf_previewer = 'xdg-open';
+  }
+}
+```
+
+TUG や W32TeX で TeX Live をインストールした方はおそらく不要だが, **tinytex** 経由で TeX をインストールした方は以下を手動でインストールしてほしい.
+
+TODO: たぶんこのリストは不完全.
+
+```{r}
+#| label: tbl-pkgs
+#| echo: false
+#| tbl-cap: "必要な TeX パッケージ"
+
+pkgs <- data.frame(
+  name = c("plautopatch", "pxjahyper"),
+  role = rep("ハイパーリンク関係", 2)
+  )
+knitr::kable(pkgs, col.names = c("パッケージ名", "役割"), booktabs = T)
+```
+
+また, 文献引用する場合は `.qmd` ファイルと同じディレクトリに `.bib` ファイルを置く必要がある.
+
+
+# 解説
+
+BXjscls 系列は, Pandoc モードにすることで up-TeX も使用できる^[<https://zrbabbler.hatenablog.com/entry/20160228/1456622107>]. しかし Quarto はデフォルトで **tinytex** の機能を使い LaTeX コンパイルを制御するようになっており, これは R Markdown のとき同様 pdflatex, xelatex, lualatex, tectonic のみ想定している. そのため, `latex-auto-mk: false` で **tinytex** ではなく Pandoc 側の機能を使う. Pandoc 側も厳密にいうと upLaTeX が選択肢にあるわけではないが, `latexmk` が選択肢として含まれているため, `.latexmkrc` の設定で `latex` コマンドを `uplatex` でオーバーライドすれば使用することができる.
+
+そしてこの場合, **tinytex** の強みである「エラーログを自己診断して自動で不足パッケージをインストールしてくれる」機能が使えなくなる. よって最初に必要パッケージの手動インストールを指定した.
+
+なお, `jsarticle` など昔から使われている日本語用文書クラスは Pandoc で使われることを想定していない (あるいは Pandoc が upLaTeX や `jsarticle` を想定していない) ため, 例えば以下のように設定してもエラーが発生し失敗する可能性が高い.
+
+```yaml
+documentclass: jsarticle
+classoption:
+  - uplatex
+  - dvipdfmx
+```
+
+エラーの例として, デフォルトのテンプレートで使用されている unicode-math は upLaTeX には対応していないというものがある. よって js シリーズなど BXJScls 以外の文書クラスを使いたい場合は Pandoc テンプレートを自作する必要がある.
+
+最後の `.bib` ファイルの配置に関する制約は, たぶん Quarto のバグでそのうち修正されると思う.
+
+# Markdown
+
+1. 番号付きの
+1. 箇条書き
+    1. ネストも
+    1. できる
+
+## 数式の表示
+
+ブラック=ショールズ方程式 (@eq-black-scholes)
+
+$$
+\frac{\partial \mathrm C}{ \partial \mathrm t } + \frac{1}{2}\sigma^{2} \mathrm S^{2}
+\frac{\partial^{2} \mathrm C}{\partial \mathrm C^2}
+  + \mathrm r \mathrm S \frac{\partial \mathrm C}{\partial \mathrm S}\ =
+  \mathrm r \mathrm C 
+$$ {#eq-black-scholes}
+
+
+HTML と PDF 双方で相互参照を使用したい場合, LaTeX の `\label()` ではなく Quarto の構文を使用する. KaTeX も使えるが PDF と互換性があるとは限らない?
+
+## コードの埋め込み
+
+@fig-plot1-1, @fig-plot1-2 を見よ.
+
+```{r}
+#| label: fig-plot1
+#| echo: true
+#| warning: false
+#| fig-cap: "複数の図"
+#| fig-subcap:
+#|   - "Air Quality"
+#|   - "箱ひげ図"
+#| layout: [50, 50]
+
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) + 
+        geom_point() + 
+        geom_smooth(method = "loess", se = F, formula = y ~ x)
+
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) + geom_boxplot()
+```
+
+次に @tbl-tables-cars, @tbl-tables-pressure を見よ.
+
+```{r}
+#| label: tbl-tables
+#| echo: false
+#| tbl-cap: "複数の表"
+#| layout-ncol: 2
+
+knitr::kable(head(cars), booktabs = T,  caption = "Cars {#tbl-tables-cars}")
+knitr::kable(head(pressure), booktabs = T, caption = "Pressure {#tbl-tables-pressure}")
+```
+
+# 文献引用
+
+[@R-quarto], @R-rmdja
