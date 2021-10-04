@@ -1,0 +1,14 @@
+/* https://w3g.jp/blog/use_yufamily */
+@font-face {
+	font-family: 'YuGothicWin';
+	font-weight: normal;
+	src: local('YuGothic-Medium'),
+	local('Yu Gothic Medium'),
+	local('YuGothic-Regular');
+}
+@font-face {
+	font-family: 'YuGothicWin';
+	font-weight: bold;
+	src: local('YuGothic-Bold'),
+	local('Yu Gothic');
+}
