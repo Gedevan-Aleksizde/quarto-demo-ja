@@ -112,6 +112,36 @@ classoption:
 
 エラーの例として, デフォルトのテンプレートで使用されている unicode-math は upLaTeX には対応していないというものがある. よって js シリーズなど BXJScls 以外の文書クラスを使いたい場合は Pandoc テンプレートを自作する必要がある.
 
+既に自前の upLaTeX 用 .tex ファイルのテンプレートがあるならば, それをもとに Pandoc 用テンプレートを作成すれば使えるかもしれない.
+
+```tex
+\documentclass[
+$if(fontsize)$
+  $fontsize$,
+$endif$
+$if(lang)$
+  $babel-lang$,
+$endif$
+$if(papersize)$
+  $papersize$paper,
+$endif$
+$if(beamer)$
+  ignorenonframetext,
+$if(handout)$
+  handout,
+$endif$
+$if(aspectratio)$
+  aspectratio=$aspectratio$,
+$endif$
+$endif$
+$for(classoption)$
+  $classoption$$sep$,
+$endfor$
+]{$documentclass$}
+```
+
+Pandoc テンプレートはテキストファイルの一部に YAML メタデータの項目を代入するだけで, 複雑な設定変更はできない. よって独自の設定はなるべくプリアンブルで完結させる必要がある.
+
 最後の `.bib` ファイルの配置に関する制約は, たぶん Quarto のバグでそのうち修正されると思う.
 
 # Markdown

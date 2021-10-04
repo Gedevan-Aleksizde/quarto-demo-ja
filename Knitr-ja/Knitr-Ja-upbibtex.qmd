@@ -16,6 +16,17 @@ format:
   html:
     toc-title: 目次
     self-contained: true
+    mainfont:
+      - Hiragino Sans
+      - YuGothicWin
+      - YuGothicWin
+      - Noto Sans CJK JP
+      - Takao PMincho
+      - sans-serif
+    tmeme:
+      - cosmo
+    css:
+      - ../jpfont.css
   word:
     toc-title: 目次
 pdf-engine: latexmk

@@ -3,11 +3,6 @@ title: Quarto が完成すると Jupyter でも R Markdown のように簡単に
 author: "ill-identified (片桐 智志)"
 date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 format:
-  docx:
-    toc: true
-    toc-title: 目次
-    number-sections: true
-    highlight-style: github
   html:
     toc: true
     toc-title: 目次
@@ -15,6 +10,17 @@ format:
     theme: minty
     filters:
       - add-target-attr.lua
+    mainfont:
+      - Hiragino Sans
+      - YuGothicWin
+      - YuGothicWin
+      - Noto Sans CJK JP
+      - Takao PMincho
+      - sans-serif
+    tmeme:
+      - cosmo
+    css:
+      - jpfont.css
   pdf:
     keep-tex: true
     toc: true
@@ -25,6 +31,11 @@ format:
       - jafont=noto-otf
     monofont: Iosevka Term Extended
     dev: cairo_pdf
+  docx:
+    toc: true
+    toc-title: 目次
+    number-sections: true
+    highlight-style: github
 pdf-engine: lualatex
 crossref:
   fig-title: 図
